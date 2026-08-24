@@ -1,0 +1,3 @@
+{{ define "main" }}
+    {{ $root := "" }}{{ if ne .Site.Language.Lang "it" }}{{ $root = printf "/%s" .Site.Language.Lang }}{{ end }}
+{{ end }}

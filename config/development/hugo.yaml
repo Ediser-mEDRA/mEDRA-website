@@ -1,0 +1,5 @@
+title: multilingual European Registration Agency of DOI (Development)
+buildDrafts: true
+minify: false
+params:
+  DebugMenu: true

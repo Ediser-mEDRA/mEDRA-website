@@ -1,0 +1,29 @@
+<div class="container d-flex align-items-center justify-content-between py-2">
+
+    <a href="{{ printf "%s" "https://doi.org" }}" class="btn btn-outline-primary btn-lang" target="_blank" rel="noopener noreferrer">
+        <div class="navbar-brand-wrap">
+            <img src="{{ "images/doi-foundation-removebg-preview.png" | relURL }}" alt="DOI — Foundation" width="100" height="24">
+        </div>
+    </a>
+
+    <div class="d-flex align-items-center gap-2">
+        
+        {{ range $i, $lang := .Site.Languages }}
+        <!--    
+        {{ if gt $i 0 }} | {{ end }}
+        -->
+            <a class="btn btn-outline-secondary btn-lang" href="{{ $lang.Lang | relLangURL }}">
+            <!--
+                <img src="https://flagcdn.com/w20/{{ if eq $lang.Lang "en" }}gb{{ else }}{{ $lang.Lang }}{{ end }}.png" class="flag" alt="{{ upper $lang.Lang }} flag" title="{{ upper $lang.Lang }}"/>
+            -->
+                <span>{{ upper $lang.Lang }}</span>
+            </a>
+        {{ end }}
+
+        <div class="vr mx-1" style="opacity: .3;"></div>
+        <button type="button" class="btn btn-outline-primary btn-lang" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+            <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+            <!-- <span id="themeLabel">Dark Mode</span> -->
+        </button>
+    </div>
+</div>
