@@ -26,7 +26,7 @@ slug:
 
 i18n:
   structure: multiple_folders
-  locales: [en, it, de]
+  locales: [de, en, it]
   default_locale: en
 
 collections:
