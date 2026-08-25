@@ -24,11 +24,6 @@ slug:
   clean_accents: true
   sanitize_replacement: "-"
 
-i18n:
-  structure: multiple_folders
-  locales: [de, en, it]
-  default_locale: en
-
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections"
@@ -37,6 +32,9 @@ collections:
     create: true
     i18n:
       structure: multiple_folders
+      locales: [de, en, it]
+      default_locale: en
+
     nested:
       depth: 2
       subfolder: true
