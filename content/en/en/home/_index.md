@@ -7,5 +7,5 @@ description: mEDRA is a DOI Registration Agency (DOI RA) officially appointed by
 weight: 10
 draft: true
 date: 2026-08-25T12:40:00.000+02:00
-author: Jehu Njikonga
+author: Jehu Procore Njikonga
 ---
