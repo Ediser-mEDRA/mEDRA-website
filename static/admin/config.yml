@@ -40,7 +40,7 @@ collections:
     nested:
       depth: 2
       summary: "{{title}}"
-      subfolder: false
+      subfolder: true
     meta:
       path:
         widget: string
