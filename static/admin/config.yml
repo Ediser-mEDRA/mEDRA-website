@@ -40,9 +40,12 @@ collections:
     nested:
       depth: 2
       summary: "{{title}}"
-      subfolder: true
-    slug: "{{slug}}"
-    path: "{{slug}}/_index"
+      subfolder: false
+    meta:
+      path:
+        widget: string
+        label: Path
+        index_file: "_index"
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
