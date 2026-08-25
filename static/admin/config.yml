@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: njikonga-med/medra-website
+  repo: Ediser-mEDRA/mEDRA-website
   branch: develop
   base_url: https://www-medra-dev.medra.org
   auth_endpoint: auth
