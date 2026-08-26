@@ -39,12 +39,12 @@ collections:
     #i18n: true
     i18n:
       structure: multiple_folders
-      locales: [de, en, it]
+      #locales: [de, en, it]
       #default_locale: en
     nested:
       depth: 2
-      summary: "{{title}}"
-      subfolder: true
+      #summary: "{{title}}"
+      #subfolder: true
     #meta:
       #path:
         #widget: string
