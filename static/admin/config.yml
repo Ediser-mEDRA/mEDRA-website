@@ -34,12 +34,12 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    slug: "{{slug}}"
-    path: "{{slug}}/_index"
+    #slug: "{{slug}}"
+    #path: "{{slug}}/_index"
     i18n:
-      structure: single_file
-      #locales: [de, en, it]
-      #default_locale: en
+      structure: nultiple_folders
+      locales: [de, en, it]
+      default_locale: en
     nested:
       depth: 2
       #summary: "{{title}}"
