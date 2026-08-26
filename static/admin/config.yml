@@ -6,7 +6,7 @@ backend:
   auth_endpoint: auth
   
   # Enable editorial workflow for content review
-  cms_label_prefix: "decap-cms/"
+  # cms_label_prefix: "decap-cms/"
 
 #local_backend: true
 display_url: https://ediser-medra.github.io/mEDRA-website
@@ -23,7 +23,11 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "-"
-
+i18n:
+  structure: multiple_folders
+  locales: [de, en, it]
+  default_locale: en
+  
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections"
@@ -32,11 +36,9 @@ collections:
     create: true
     i18n:
       structure: multiple_folders
-      locales: [de, en, it]
-      default_locale: en
-
     nested:
       depth: 2
+      summary: '{{title}}'
       subfolder: true
     meta:
       path:
