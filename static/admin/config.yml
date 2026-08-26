@@ -39,6 +39,8 @@ collections:
     i18n: true
     #slug: "{{slug}}"
     #path: "{{slug}}/_index"
+    slug: "{{slug}}"
+    path: "{{locale}}/{{slug}}/_index" # Esplicita la posizione di {{locale}}
     #i18n:
       #structure: multiple_folders
       #locales: [de, en, it]
