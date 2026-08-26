@@ -34,15 +34,20 @@ collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections"
     label: "Sections"
-    folder: "content/en"
+    folder: "content"
     create: true
     i18n: true
     slug: "{{slug}}"
-    path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
+    #path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
     nested:
       depth: 2
       summary: "{{title}}"
-      index_file: "_index"
+      subfolders: true
+    meta:
+      path:
+        widget: string
+        label: Path
+        index_file: _index
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
