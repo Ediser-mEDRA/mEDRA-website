@@ -37,8 +37,8 @@ collections:
     slug: "{{slug}}"
     path: "{{slug}}/_index"
     i18n:
-      structure: multiple_folders
-      locales: [de, en, it]
+      structure: single_file
+      #locales: [de, en, it]
       #default_locale: en
     nested:
       depth: 2
