@@ -42,6 +42,7 @@ collections:
     i18n:
       structure: multiple_folders
       locales: [en, de, fr]
+      default_locale: en
     #meta:
       #path:
         #widget: string
