@@ -35,21 +35,21 @@ collections:
     folder: "content"
     create: true
     #slug: "{{slug}}"
-    #path: "{{slug}}/_index"
+    path: "{{slug}}/_index"
     #i18n: true
     nested:
       depth: 2
-      summary: '{{title}}'
+      summary: "{{title}}"
       subfolder: true
-    #i18n:
-      #structure: multiple_folders
-      #locales: [de, en, it]
+    i18n:
+      structure: single_file
+      locales: [de, en, it]
       #default_locale: en
-    meta:
-      path:
-        widget: string
-        label: Path
-        index_file: "_index"
+    #meta:
+      #path:
+        #widget: string
+        #label: Path
+        #index_file: "_index"
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
