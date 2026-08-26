@@ -34,8 +34,8 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    slug: "{{slug}}"
-    path: "{{slug}}/_index"
+    #slug: "{{slug}}"
+    #path: "{{slug}}/_index"
     #i18n: true
     nested:
       depth: 2
