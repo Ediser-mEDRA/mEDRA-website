@@ -38,12 +38,15 @@ collections:
     nested:
       depth: 2
       summary: '{{title}}'
-      subfolder: true
-    meta:
-      path:
-        widget: string
-        label: Path
-        index_file: "_index"
+      subfolder: false
+    i18n:
+      structure: multiple_folders
+      locales: [en, de, fr]
+    #meta:
+      #path:
+        #widget: string
+        #label: Path
+        #index_file: "_index"
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
