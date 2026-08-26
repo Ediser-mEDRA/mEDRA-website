@@ -37,12 +37,12 @@ collections:
     folder: "content"
     create: true
     #i18n: true
-    #slug: "{{slug}}"
-    #path: "{{slug}}/_index"
+    slug: "{{slug}}"
+    path: "{{slug}}/_index"
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
-      default_locale: en
+      #default_locale: en
     nested:
       depth: 2
       #summary: "{{title}}"
