@@ -42,8 +42,8 @@ collections:
       summary: '{{title}}'
       subfolder: true
     i18n:
-      structure: single_file
-      locales: [en, de, fr]
+      structure: multiple_folders
+      locales: [de, en, it]
       #default_locale: en
     #meta:
       #path:
