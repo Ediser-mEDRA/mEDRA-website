@@ -23,10 +23,10 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "-"
-#i18n:
-  #structure: multiple_folders
-  #locales: [de, en, it]
-  #default_locale: en
+i18n:
+  structure: multiple_folders
+  locales: [de, en, it]
+  default_locale: en
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
@@ -39,10 +39,10 @@ collections:
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
-      default_locale: en
+      #default_locale: en
     nested:
       depth: 2
-      #summary: "{{title}}"
+      summary: "{{title}}"
       #subfolder: true
     meta:
       path:
