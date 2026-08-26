@@ -34,8 +34,7 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    i18n:
-      structure: multiple_folders
+    i18n: true
     nested:
       depth: 2
       summary: '{{title}}'
