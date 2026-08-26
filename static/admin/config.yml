@@ -36,15 +36,15 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    i18n: true
+    #i18n: true
     #slug: "{{slug}}"
     #path: "{{slug}}/_index"
     slug: "{{slug}}"
     path: "{{locale}}/{{slug}}/_index" # Esplicita la posizione di {{locale}}
-    #i18n:
-      #structure: multiple_folders
-      #locales: [de, en, it]
-      #default_locale: en
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
+      default_locale: en
     nested:
       depth: 2
       #summary: "{{title}}"
