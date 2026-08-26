@@ -23,10 +23,10 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "-"
-i18n:
-  structure: multiple_folders
-  locales: [de, en, it]
-  default_locale: en
+#i18n:
+  #structure: multiple_folders
+  #locales: [de, en, it]
+  #default_locale: en
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
@@ -34,13 +34,12 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    path: "{{slug}}/_index"
     slug: "{{slug}}"
-    #i18n: true
+    path: "{{slug}}/_index"
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
-      #default_locale: en
+      default_locale: en
     nested:
       depth: 2
       #summary: "{{title}}"
