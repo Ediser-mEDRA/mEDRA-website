@@ -34,17 +34,17 @@ collections:
     label: "Sections"
     folder: "content"
     create: true
-    #slug: "{{slug}}"
-    #path: "{{slug}}/_index"
-    i18n: true
-    #i18n:
-      #structure: multiple_folders
-      #locales: [de, en, it]
+    path: "{{slug}}/_index"
+    slug: "{{slug}}"
+    #i18n: true
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
       #default_locale: en
     nested:
       depth: 2
       summary: "{{title}}"
-      subfolder: false
+      subfolder: true
     #meta:
       #path:
         #widget: string
