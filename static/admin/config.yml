@@ -35,7 +35,7 @@ collections:
     folder: "content"
     create: true
     #slug: "{{slug}}"
-    path: "{{slug}}/_index"
+    #path: "{{slug}}/_index"
     #i18n: true
     nested:
       depth: 2
