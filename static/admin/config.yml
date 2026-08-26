@@ -28,7 +28,7 @@ slug:
 i18n:
   structure: multiple_folders
   locales: [de, en, it]
-  default_locale: de
+  default_locale: en
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
@@ -38,16 +38,7 @@ collections:
     create: true
     i18n: true
     slug: "{{slug}}"
-    #path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
-    nested:
-      depth: 2
-      summary: "{{title}}"
-      subfolders: true
-    meta:
-      path:
-        widget: string
-        label: Path
-        index_file: _index
+    path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
