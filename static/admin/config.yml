@@ -28,7 +28,7 @@ slug:
 i18n:
   structure: multiple_folders
   locales: [de, en, it]
-  default_locale: en
+  default_locale: de
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
