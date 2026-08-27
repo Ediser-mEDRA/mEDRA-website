@@ -36,11 +36,11 @@ collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections"
     label: "Sections"
-    folder: "content"
+    folder: "content/en"
     create: true
     i18n: true
     nested:
-      depth: 10
+      depth: 2
       summary: "{{title}}"
     slug: "{{slug}}"
     path: "{{slug}}/_index"
