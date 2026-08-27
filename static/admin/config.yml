@@ -59,7 +59,9 @@ collections:
     folder: "content"
     path: "{{fields.section}}/{{slug}}/_index"
     create: true
-    i18n: true
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
     nested:
       depth: 3
       summary: "{{title}}"
@@ -85,7 +87,9 @@ collections:
     folder: "content"
     path: "{{slug}}"
     create: true
-    i18n: true
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
     nested:
       depth: 10
       summary: "{{title}}"
