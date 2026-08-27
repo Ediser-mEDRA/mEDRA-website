@@ -25,6 +25,8 @@ slug:
   clean_accents: true
   sanitize_replacement: "-"
 
+locale: en
+
 i18n:
   structure: multiple_folders
   locales: [de, en, it]
@@ -37,6 +39,9 @@ collections:
     folder: "content"
     create: true
     i18n: true
+    nested:
+      depth: 10
+      summary: "{{title}}"
     slug: "{{slug}}"
     path: "{{slug}}/_index"
     fields:
