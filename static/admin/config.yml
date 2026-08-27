@@ -38,7 +38,7 @@ collections:
     create: true
     i18n: true
     slug: "{{slug}}"
-    path: "{{locale}}/{{slug}}/_index" # Esplicita la posizione di {{locale}}
+    path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
     nested:
       depth: 2
       summary: "{{title}}"
