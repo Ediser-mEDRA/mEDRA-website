@@ -1,6 +1,6 @@
 baseURL: /
 languageCode: en-us
-
+defaultContentLanguage: en
 languages:
   de:
     languageCode: "de-DE"
@@ -24,5 +24,5 @@ languages:
     contentDir: "content/it"
     weight: 3
     params:
-      langFlag: "🇮🇹"
+      langFlag: "IT"
       tagline: "mEDRA è l'Agenzia Europea di Registrazione del DOI (Digital Object Identifier), lo standard che consente l'identificazione persistente di qualunque forma di proprietà intellettuale in rete."
