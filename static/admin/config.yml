@@ -37,7 +37,11 @@ collections:
     folder: "content"
     create: true
     i18n: true
-    path: "{{slug}}/_index"
+    #path: "{{slug}}/_index"
+    nested:
+      depth: 2
+      summary: "{{title}}"
+      subfolder: true
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "Description", name: "description", widget: "string", i18n: true }
