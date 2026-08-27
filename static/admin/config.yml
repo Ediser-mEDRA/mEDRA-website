@@ -67,7 +67,7 @@ collections:
         collection: "sections"
         search_fields: ["title"]
         display_fields: ["title"]
-        value_field: "{{path}}"
+        value_field: "{{slug}}"
         required: true
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
@@ -79,7 +79,7 @@ collections:
   - name: pages
     label: "Pages"
     folder: "content"
-    path: "{{path}}"
+    path: "{{slug}}"
     create: true
     delete: true
     i18n: true
@@ -100,7 +100,7 @@ collections:
         i18n: duplicate
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "Description", name: "description", widget: "string", required: false, i18n: true }
-      #- { label: "Weight", name: "weight", widget: "number", i18n: duplicate }
+      - { label: "Weight", name: "weight", widget: "number", i18n: duplicate }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true }
       - { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true }
       - { label: "Content", name: "body", widget: "markdown", i18n: true }
