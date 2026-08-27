@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: github
   repo: Ediser-mEDRA/mEDRA-website
   branch: develop
   base_url: https://www-medra-dev.medra.org
