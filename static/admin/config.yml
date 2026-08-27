@@ -37,6 +37,7 @@ collections:
     folder: "content/en"
     create: true
     #i18n: true
+    path: "{{slug}}/_index"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: 'Description', name: 'description', widget: 'string' }
