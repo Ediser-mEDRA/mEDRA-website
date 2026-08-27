@@ -25,18 +25,18 @@ slug:
   clean_accents: true
   sanitize_replacement: "-"
 
-#i18n:
-  #structure: multiple_folders
-  #locales: [de, en, it]
-  #default_locale: en
+i18n:
+  structure: multiple_folders
+  locales: [de, en, it]
+  default_locale: en
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections"
     label: "Sections"
-    folder: "content/en"
+    folder: "content"
     create: true
-    #i18n: true
+    i18n: true
     path: "{{slug}}/_index"
     fields:
       - { label: "Title", name: "title", widget: "string" }
