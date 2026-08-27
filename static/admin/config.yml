@@ -35,17 +35,76 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    slug: "{{slug}}"
     path: "{{slug}}/_index"
     create: true
+    delete: true
+    slug: "{{slug}}"
     i18n: true
-    #nested:
-      #depth: 2
-      #summary: "{{title}}"
+    nested:
+      depth: 2
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
-      - { label: "Description", name: "description", widget: "string", i18n: true }
+      - { label: 'Description', name: 'description', widget: 'string', i18n: true }
       - { label: "Weight", name: "weight", widget: "number", i18n: duplicate }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true }
       - { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true }
       - { label: "Author", name: "author", widget: "string", required: false, i18n: true }
+
+  # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
+  - name: "subsections"
+    label: "Subsections"
+    folder: "content"
+    path: "{{fields.section}}/{{slug}}/_index"
+    create: true
+    delete: true
+    i18n: true
+    nested:
+      depth: 3
+    fields:
+      - label: "Parent Section"
+        name: "section"
+        widget: "relation"
+        collection: "sections"
+        search_fields: ["title"]
+        display_fields: ["title"]
+        value_field: "{{path}}"
+        required: true
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: 'Description', name: 'description', widget: 'string', i18n: true }
+      - { label: "Weight", name: "weight", widget: "number", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true }
+      - { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true }
+      - { label: "Author", name: "author", widget: "string", required: false, i18n: true }
+
+  - name: pages
+    label: "Pages"
+    folder: "content"
+    path: "{{path}}"
+    create: true
+    delete: true
+    i18n: true
+    filter:
+      field: "type"
+      value: "page"
+    nested:
+      depth: 100
+      summary: "{{title}}"
+      subfolders: false   # pages are leaf files, they don't have their own children
+    meta:
+      path:
+        widget: "string"
+        label: "Path (es. about-medra/team or about-medra/resources/team)"
+        required: true
+    fields:
+      - label: "Type"
+        name: "type"
+        widget: "hidden"
+        default: "page"
+        i18n: duplicate
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Description", name: "description", widget: "string", required: false, i18n: true }
+      #- { label: "Weight", name: "weight", widget: "number", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true }
+      - { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true }
+      - { label: "Content", name: "body", widget: "markdown", i18n: true }
+      - { label: "Author", name: "author", widget: "string", required: true, i18n: true }
