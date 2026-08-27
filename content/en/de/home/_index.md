@@ -7,6 +7,6 @@ description: mEDRA ist eine DOI-Registrierungsagentur (DOI RA) und wurde von der
   international an.
 weight: 10
 draft: true
-date: 2026-08-25T12:44:00.000+02:00
-author: Jehu Njikonga
+date: 2026-08-27T10:49:00.000+02:00
+author: Jehu Procore Njikonga
 ---
