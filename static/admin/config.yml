@@ -35,9 +35,9 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    #path: "{{slug}}/_index"
+    path: "{{slug}}/_index"
     create: true
-    #slug: "{{slug}}"
+    slug: "{{slug}}"
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
@@ -88,7 +88,7 @@ collections:
     path: "{{slug}}"
     create: true
     i18n:
-      structure: multiple_file
+      structure: multiple_files
       locales: [de, en, it]
     nested:
       depth: 10
