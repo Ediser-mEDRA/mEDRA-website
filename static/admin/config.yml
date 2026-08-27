@@ -38,7 +38,7 @@ collections:
     create: true
     i18n: true
     slug: "{{slug}}"
-    path: "{{locale}}/{{slug}}/_index" # Esplicita la posizione di {{locale}}
+    #path: "{{locale}}/{{slug}}/_index" # Esplicita la posizione di {{locale}}
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
