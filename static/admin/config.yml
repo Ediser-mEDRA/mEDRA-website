@@ -6,9 +6,9 @@ backend:
   auth_endpoint: auth
   
   # Enable editorial workflow for content review
-  cms_label_prefix: "decap-cms/"
+  cms_label_prefix: "cms/"
 
-#local_backend: true
+local_backend: true
 display_url: https://ediser-medra.github.io/mEDRA-website
 
 logo:
