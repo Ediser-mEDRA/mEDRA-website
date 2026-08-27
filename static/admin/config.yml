@@ -37,11 +37,6 @@ collections:
     folder: "content"
     create: true
     i18n: true
-    slug: "{{slug}}"
-    path: "{{slug}}/_index" # Esplicita la posizione di {{locale}}
-    nested:
-      depth: 2
-      summary: "{{title}}"
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: 'Description', name: 'description', widget: 'string', i18n: true }
