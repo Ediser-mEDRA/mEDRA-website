@@ -24,11 +24,6 @@ slug:
   encoding: "ascii"
   clean_accents: true
   sanitize_replacement: "-"
-
-i18n:
-  structure: multiple_folders
-  locales: [de, en, it]
-  default_locale: en
   
 collections:
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
@@ -41,6 +36,7 @@ collections:
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
+      default_locale: en
     fields: [
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: 'Description', name: 'description', widget: 'string', i18n: true },
@@ -62,9 +58,10 @@ collections:
     folder: "content"
     path: "{{fields.section}}/_index"
     create: true
-    i18n: true
-      #structure: multiple_folders
-      #locales: [de, en, it]
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
+      default_locale: en
     fields: [
       { label: "Parent Section", name: "section", widget: "relation", collection: "sections", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string", i18n: true },
