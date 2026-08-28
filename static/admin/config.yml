@@ -37,7 +37,6 @@ collections:
     folder: "content"
     slug: "{{slug}}"
     path: "{{slug}}/_index"
-    extension: md
     create: true
     i18n: true
       #structure: multiple_folders
