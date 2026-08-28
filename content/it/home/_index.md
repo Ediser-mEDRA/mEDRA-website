@@ -6,6 +6,6 @@ description: mEDRA è l'agenzia di registrazione DOI dell'Associazione italiana
   e intermediari in Italia e all'estero.
 weight: 10
 draft: true
-date: 2026-08-25T12:40:00.000+02:00
-author: Jehu Njikonga
+date: 2026-08-28T10:07:00.000+02:00
+author: Jehu Procore Njikonga
 ---
