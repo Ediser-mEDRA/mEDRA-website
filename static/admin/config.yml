@@ -35,7 +35,7 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    slug: "{{slug}}"
+    #slug: "{{slug}}"
     path: "_index"
     create: true
     i18n:
@@ -61,7 +61,7 @@ collections:
   - name: "subsections"
     label: "Subsections"
     folder: "content"
-    path: "{{fields.section}}/_index"
+    path: "{{fields.sections}}/_index"
     create: true
     i18n:
       structure: multiple_folders
