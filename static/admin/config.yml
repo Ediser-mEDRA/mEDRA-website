@@ -38,9 +38,9 @@ collections:
     #slug: "{{slug}}"
     #path: "{{slug}}/_index"
     create: true
-    i18n: true
-      #structure: multiple_folders
-      #locales: [de, en, it]
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
     fields: [
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: 'Description', name: 'description', widget: 'string', i18n: true },
