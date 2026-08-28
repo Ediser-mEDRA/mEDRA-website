@@ -36,7 +36,7 @@ collections:
     label: "Sections"
     folder: "content"
     slug: "{{slug}}"
-    #path: "{{slug}}/_index"
+    path: "_index"
     create: true
     i18n: true
       #structure: multiple_folders
@@ -60,11 +60,11 @@ collections:
   - name: "subsections"
     label: "Subsections"
     folder: "content"
-    path: "{{fields.section}}/{{slug}}/_index"
+    path: "{{fields.section}}/_index"
     create: true
-    i18n:
-      structure: multiple_folders
-      locales: [de, en, it]
+    i18n: true
+      #structure: multiple_folders
+      #locales: [de, en, it]
     fields: [
       { label: "Parent Section", name: "section", widget: "relation", collection: "sections", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string", i18n: true },
