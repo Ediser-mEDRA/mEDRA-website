@@ -36,14 +36,14 @@ collections:
     label: "Sections"
     folder: "content"
     slug: "{{slug}}"
-    #path: "_index"
+    path: "{{slug}}"
     create: true
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
       default_locale: en
     fields: [
-       { label: "Section", name: "section", widget: "string", default: "{{slug}}/_index", required: true },
+       #{ label: "Section", name: "section", widget: "string", default: "{{slug}}/_index", required: true },
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: 'Description', name: 'description', widget: 'string', i18n: true },
        { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
