@@ -6,7 +6,7 @@ backend:
   auth_endpoint: auth
   
   # Enable editorial workflow for content review
-  #cms_label_prefix: "cms/"
+  cms_label_prefix: "decap-cms/"
 
 local_backend: true
 display_url: https://ediser-medra.github.io/mEDRA-website
@@ -35,8 +35,8 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    #slug: "{{slug}}"
-    #path: "{{slug}}/_index"
+    slug: "{{slug}}"
+    path: "{{slug}}/_index"
     create: true
     i18n:
       structure: multiple_folders
@@ -55,7 +55,7 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    meta: { path: { widget: string, label: "Path", index_file: "_index" } }
+    #meta: { path: { widget: string, label: "Path", index_file: "_index" } }
 
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
