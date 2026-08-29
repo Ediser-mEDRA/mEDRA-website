@@ -35,8 +35,8 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    slug: "{{slug}}"
-    path: "{{slug}}"
+    #slug: "{{slug}}"
+    #path: "{{slug}}"
     create: true
     i18n:
       structure: multiple_folders
@@ -56,7 +56,7 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    #meta: { path: { widget: string, label: "Path", index_file: "_index", i18n: true } }
+    meta: { path: { widget: string, label: "Path", index_file: "_index", i18n: true } }
 
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
