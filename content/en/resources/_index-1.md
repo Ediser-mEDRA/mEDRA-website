@@ -1,8 +1,8 @@
 ---
-title: Resources
-description: The Resources section provides access to documentation, guides,
-  reference materials, and other informational content designed to help users
-  understand and effectively use mEDRA's services.
+title: Risorse
+description: La sezione “Risorse” offre accesso a documentazione, guide,
+  materiali di riferimento e altri contenuti informativi pensati per aiutare gli
+  utenti a comprendere e utilizzare in modo efficace i servizi di mEDRA.
 weight: 60
 draft: true
 date: 2026-08-31T10:18:00.000+02:00
