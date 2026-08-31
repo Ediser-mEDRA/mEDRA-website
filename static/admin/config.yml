@@ -35,9 +35,15 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    slug: "{{slug}}"
-    path: "{{slug}}"
+    #slug: "{{slug}}"
+    #path: "{{slug}}/_index"
     create: true
+    # Add nested and meta objects
+    nested:
+      depth: 2
+      summary: "{{title}}"
+      subfolders: true
+    meta: { path: { widget: string, label: "Path", index_file: "_index" } }
     i18n:
       structure: multiple_folders
       locales: [de, en, it]
@@ -51,12 +57,6 @@ collections:
        { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
        { label: "Author", name: "author", widget: "string", required: false, i18n: true },
       ]
-    # Add nested and meta objects
-    nested:
-      depth: 2
-      summary: "{{title}}"
-      subfolders: true
-    #meta: { path: { widget: string, label: "Path", index_file: "_index" } }
 
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
