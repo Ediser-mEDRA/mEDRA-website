@@ -35,6 +35,7 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
+    path: "{{slug}}/index"
     create: true
     i18n:
       structure: multiple_folders
@@ -50,11 +51,11 @@ collections:
        { label: "Author", name: "author", widget: "string", required: false, i18n: true },
       ]
     # Add nested and meta objects
-    nested:
-      depth: 2
-      summary: "{{title}}"
-      subfolders: true
-    meta: { path: { widget: string, label: "Path", index_file: "_index" } }
+    #nested:
+    #  depth: 2
+    #  summary: "{{title}}"
+    #  subfolders: true
+    #meta: { path: { widget: string, label: "Path", index_file: "_index" } }
     
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
