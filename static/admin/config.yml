@@ -35,9 +35,12 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    path: "{{slug}}/_index"
+    #path: "{{slug}}/_index"
     create: true
-    i18n: true
+    i18n:
+      structure: multiple_folders
+      locales: [de, en, it]
+      default_locale: en
     fields: [
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: 'Description', name: 'description', widget: 'string', i18n: true },
