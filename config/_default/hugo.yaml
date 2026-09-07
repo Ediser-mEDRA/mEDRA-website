@@ -1,11 +1,11 @@
 baseURL: /
 languageCode: en-us
-defaultContentLanguage: en
+#defaultContentLanguage: en
 languages:
   de:
     languageCode: "de-DE"
     languageName: "Deutsch"
-    contentDir: "content/de"
+    #contentDir: "content/de"
     weight: 1
     params:
       langFlag: "DE"
@@ -13,7 +13,7 @@ languages:
   en:
     languageCode: "en-US"
     languageName: "English"
-    contentDir: "content/en"
+    #contentDir: "content/en"
     weight: 2
     params:
       langFlag: "EN"
@@ -21,7 +21,7 @@ languages:
   it:
     languageCode: "it-IT"
     languageName: "Italiano"
-    contentDir: "content/it"
+    #contentDir: "content/it"
     weight: 3
     params:
       langFlag: "IT"
