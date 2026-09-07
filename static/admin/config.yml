@@ -35,14 +35,10 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    #path: "_index"
+    path: "{{slug}}/_index"
     create: true
-    i18n:
-      structure: multiple_folders
-      locales: [de, en, it]
-      default_locale: en
+    i18n: true
     fields: [
-       #{ label: "Section", name: "section", widget: "string", default: "{{slug}}/_index", required: true },
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: 'Description', name: 'description', widget: 'string', i18n: true },
        { label: "Weight", name: "weight", widget: "number", i18n: true },
@@ -55,7 +51,7 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    meta: { path: { widget: string, label: "Path", index_file: "_index" } }
+    #meta: { path: { widget: string, label: "Path", index_file: "_index" } }
     
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
