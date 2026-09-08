@@ -34,7 +34,8 @@ collections:
   - name: "sections_en"
     label: "Sections (EN)"
     folder: "content/en"
-    path: "{{slug}}"
+    slug: {{slug}}
+    path: "{{slug}}/_index"
     create: true
     #i18n:
       #structure: multiple_folders
@@ -53,17 +54,17 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    meta:
-      path:
-        widget: string
-        label: "Path"
-        index_file: "_index"
+    #meta:
+    #  path:
+    #    widget: string
+    #    label: "Path"
+    #    index_file: "_index"
 
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections_it"
     label: "Sections (IT)"
     folder: "content/it"
-    #path: "{{slug}}/_index"
+    path: "{{slug}}/_index"
     create: true
     #i18n:
       #structure: multiple_folders
@@ -82,17 +83,17 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    meta:
-      path:
-        widget: string
-        label: "Path"
-        index_file: "_index"
+    #meta:
+    #  path:
+    #    widget: string
+    #    label: "Path"
+    #    index_file: "_index"
 
   # --- SECTIONS (content/<locale>/<section>/_index.md) ---
   - name: "sections_de"
     label: "Sections (DE)"
     folder: "content/de"
-    #path: "{{slug}}/_index"
+    path: "{{slug}}/_index"
     create: true
     #i18n:
       #structure: multiple_folders
@@ -111,11 +112,11 @@ collections:
       depth: 2
       summary: "{{title}}"
       subfolders: true
-    meta:
-      path:
-        widget: string
-        label: "Path"
-        index_file: "_index"
+    #meta:
+    #  path:
+    #    widget: string
+    #    label: "Path"
+    #    index_file: "_index"
         
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections_en"
@@ -154,6 +155,31 @@ collections:
       #default_locale: en
     fields: [
       { label: "Parent Section", name: "section", widget: "relation", collection: "sections_it", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Title", name: "title", widget: "string" },
+      { label: "Description", name: "description", widget: "string" },
+      { label: "Weight", name: "weight", widget: "number" },
+      { label: "Draft", name: "draft", widget: "boolean", default: false },
+      { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}" },
+      { label: "Author", name: "author", widget: "string", required: false },
+    ]
+    # Add nested and meta objects
+    nested:
+      depth: 3
+      summary: "{{title}}"
+      subfolders: true
+    #meta: { path: { widget: string, label: 'Path', index_file: '_index' } }
+    
+  - name: "subsections_de"
+    label: "Subsections (DE)"
+    folder: "content"
+    path: "{{fields.sections_de}}/_index"
+    create: true
+    #i18n:
+      #structure: multiple_folders
+      #locales: [de, en, it]
+      #default_locale: en
+    fields: [
+      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_de", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string" },
       { label: "Description", name: "description", widget: "string" },
       { label: "Weight", name: "weight", widget: "number" },
