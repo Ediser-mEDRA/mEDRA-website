@@ -128,7 +128,7 @@ collections:
       #locales: [de, en, it]
       #default_locale: en
     fields: [
-      { label: "Parent Section", name: "section", widget: "relation", collection: "sections", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_en", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string" },
       { label: "Description", name: "description", widget: "string" },
       { label: "Weight", name: "weight", widget: "number" },
@@ -141,7 +141,32 @@ collections:
       depth: 3
       summary: "{{title}}"
       subfolders: true
-    meta: { path: { widget: string, label: 'Path', index_file: '_index' } }
+    #meta: { path: { widget: string, label: 'Path', index_file: '_index' } }
+    
+  - name: "subsections_it"
+    label: "Subsections (IT)"
+    folder: "content"
+    path: "{{fields.sections_it}}/_index"
+    create: true
+    #i18n:
+      #structure: multiple_folders
+      #locales: [de, en, it]
+      #default_locale: en
+    fields: [
+      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_it", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Title", name: "title", widget: "string" },
+      { label: "Description", name: "description", widget: "string" },
+      { label: "Weight", name: "weight", widget: "number" },
+      { label: "Draft", name: "draft", widget: "boolean", default: false },
+      { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}" },
+      { label: "Author", name: "author", widget: "string", required: false },
+    ]
+    # Add nested and meta objects
+    nested:
+      depth: 3
+      summary: "{{title}}"
+      subfolders: true
+    #meta: { path: { widget: string, label: 'Path', index_file: '_index' } }
     
   - name: pages
     label: "Pages"
