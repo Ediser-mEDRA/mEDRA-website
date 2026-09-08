@@ -34,7 +34,7 @@ collections:
   - name: "sections_en"
     label: "Sections (EN)"
     folder: "content/en"
-    slug: {{slug}}
+    slug: "{{slug}}"
     path: "{{slug}}/_index"
     create: true
     #i18n:
@@ -64,6 +64,7 @@ collections:
   - name: "sections_it"
     label: "Sections (IT)"
     folder: "content/it"
+    slug: "{{slug}}"
     path: "{{slug}}/_index"
     create: true
     #i18n:
@@ -93,6 +94,7 @@ collections:
   - name: "sections_de"
     label: "Sections (DE)"
     folder: "content/de"
+    slug: "{{slug}}"
     path: "{{slug}}/_index"
     create: true
     #i18n:
