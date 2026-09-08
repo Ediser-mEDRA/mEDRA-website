@@ -4,9 +4,8 @@ backend:
   branch: develop
   base_url: https://www-medra-dev.medra.org
   auth_endpoint: auth
-  
-  # Enable editorial workflow for content review
-  #cms_label_prefix: "decap-cms/"
+  #causes all commits to be “squashed” into a single commit when the pull request is merged
+  squash_merges: true
 
 local_backend: true
 display_url: https://ediser-medra.github.io/mEDRA-website
@@ -35,7 +34,7 @@ collections:
   - name: "sections"
     label: "Sections"
     folder: "content"
-    path: "{{slug}}"
+    path: "{{slug}}/_index"
     create: true
     i18n:
       structure: multiple_folders
