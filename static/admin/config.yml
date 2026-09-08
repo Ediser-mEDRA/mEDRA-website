@@ -123,7 +123,7 @@ collections:
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections_en"
     label: "Subsections (EN)"
-    folder: "content"
+    folder: "content/en"
     path: "{{fields.sections_en}}/_index"
     create: true
     #i18n:
@@ -148,7 +148,7 @@ collections:
     
   - name: "subsections_it"
     label: "Subsections (IT)"
-    folder: "content"
+    folder: "content/it"
     path: "{{fields.sections_it}}/_index"
     create: true
     #i18n:
@@ -173,7 +173,7 @@ collections:
     
   - name: "subsections_de"
     label: "Subsections (DE)"
-    folder: "content"
+    folder: "content/de"
     path: "{{fields.sections_de}}/_index"
     create: true
     #i18n:
