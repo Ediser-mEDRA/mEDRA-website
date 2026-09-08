@@ -58,7 +58,6 @@ collections:
         widget: string
         label: "Path"
         index_file: "_index"
-        i18n: true
     
   # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
   - name: "subsections"
@@ -73,7 +72,7 @@ collections:
     fields: [
       { label: "Parent Section", name: "section", widget: "relation", collection: "sections", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string", i18n: true },
-      { label: 'Description', name: 'description', widget: 'string', i18n: true },
+      { label: "Description", name: "description", widget: "string", i18n: true },
       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
