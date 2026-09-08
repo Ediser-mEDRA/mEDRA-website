@@ -131,7 +131,7 @@ collections:
       #locales: [de, en, it]
       #default_locale: en
     fields: [
-      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_en", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Parent Section", name: "section_en", widget: "relation", collection: "sections_en", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string" },
       { label: "Description", name: "description", widget: "string" },
       { label: "Weight", name: "weight", widget: "number" },
@@ -156,7 +156,7 @@ collections:
       #locales: [de, en, it]
       #default_locale: en
     fields: [
-      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_it", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Parent Section", name: "section_it", widget: "relation", collection: "sections_it", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string" },
       { label: "Description", name: "description", widget: "string" },
       { label: "Weight", name: "weight", widget: "number" },
@@ -181,7 +181,7 @@ collections:
       #locales: [de, en, it]
       #default_locale: en
     fields: [
-      { label: "Parent Section", name: "section", widget: "relation", collection: "sections_de", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
+      { label: "Parent Section", name: "section_de", widget: "relation", collection: "sections_de", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true },
       { label: "Title", name: "title", widget: "string" },
       { label: "Description", name: "description", widget: "string" },
       { label: "Weight", name: "weight", widget: "number" },
