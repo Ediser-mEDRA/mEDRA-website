@@ -34,7 +34,7 @@ collections:
   - name: "sections_en"
     label: "Sections (EN)"
     folder: "content/en"
-    #path: "{{slug}}/_index"
+    path: "{{slug}}"
     create: true
     #i18n:
       #structure: multiple_folders
