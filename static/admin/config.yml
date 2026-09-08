@@ -63,7 +63,7 @@ collections:
   - name: "subsections"
     label: "Subsections"
     folder: "content"
-    path: "{{fields.sections}}/_index"
+    #path: "{{fields.sections}}/_index"
     create: true
     i18n:
       structure: multiple_folders
