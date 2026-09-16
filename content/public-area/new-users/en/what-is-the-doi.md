@@ -7,7 +7,7 @@ description: The Digital Object Identifier is a standard for persistently
 weight: 20
 draft: true
 date: 2026-09-16T12:25:00.000+02:00
-author: Jehu Njikonga
+author: Jehu Njikonga Nguejip
 ---
 ![mEDRA Logo](/images/medra-logo.png "mEDRA – DOI Registration Agency")
 
