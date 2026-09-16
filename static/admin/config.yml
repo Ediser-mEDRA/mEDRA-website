@@ -74,3 +74,123 @@ collections:
        { label: "Content", name: "body", widget: "markdown", i18n: true },
        { label: "Author", name: "author", widget: "string", required: true, i18n: true },
     ]
+
+  - name: reserved-area-account-management
+    label: "Account Management 🔐"
+    folder: "content/reserved/account-management"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+
+  - name: reserved-area-doi-registration
+    label: "DOI Registration 🔐"
+    folder: "content/reserved/doi-registration"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+  
+  - name: reserved-area-doi-url-update
+    label: "DOI URL Update 🔐"
+    folder: "content/reserved/doi-url-update"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+
+  - name: reserved-area-doi-crawlable-url-service
+    label: "DOI Crawlable URL Service 🔐"
+    folder: "content/reserved/doi-crawlable-url-service"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+
+  - name: reserved-area-citations-registration
+    label: "Citations Registration 🔐"
+    folder: "content/reserved/citations-registration"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+
+  - name: reserved-area-query-upload
+    label: "Query Upload 🔐"
+    folder: "content/reserved/query-upload"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+
+  - name: reserved-area-drs-basic-registration
+    label: "DRS Basic Registration 🔐"
+    folder: "content/reserved/drs-basic-registration"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+  
+  - name: reserved-area-monitoring-registration
+    label: "Monitoring Registration 🔐"
+    folder: "content/reserved/monitoring-registration"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
