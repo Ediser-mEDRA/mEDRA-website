@@ -8,7 +8,7 @@ description: Der Digital Object Identifier (DOI) ist eine dauerhafte
 weight: 20
 draft: true
 date: 2026-09-16T12:25:00.000+02:00
-author: Jehu Njikonga
+author: Jehu Procore Njikonga
 ---
 ![mEDRA Logo](/images/medra-logo.png "mEDRA – DOI Registration Agency")
 
