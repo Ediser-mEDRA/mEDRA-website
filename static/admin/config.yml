@@ -30,69 +30,11 @@ i18n:
   default_locale: en
   
 collections:
-  # --- SECTIONS (content/<locale>/<section>/_index.md) ---
-  - name: "sections"
-    label: "Sections"
-    folder: "content"
-    #path: "{{slug}}/_index"
-    create: true
-    i18n:
-      structure: multiple_folders
-      locales: [de, en, it]
-      default_locale: en
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: 'Description', name: 'description', widget: 'string', i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: false, i18n: true },
-      ]
-    # Add nested and meta objects
-    nested:
-      depth: 2
-      summary: "{{title}}"
-      subfolders: true
-    #meta:
-      #path:
-        #widget: string
-        #label: "Path"
-        #index_file: "_index"
-    
-  # --- SUBSECTIONS (content/<locale>/<section>/<subsection>/**/_index.md) ---
-  - name: "subsections"
-    label: "Subsections"
-    folder: "content"
-    path: "{{fields.sections}}/_index"
-    create: true
-    i18n:
-      structure: multiple_folders
-      locales: [de, en, it]
-      default_locale: en
-    fields: [
-      { label: "Parent Section", name: "section", widget: "relation", collection: "sections", search_fields: ["title"], display_fields: ["title"], value_field: "{{slug}}", required: true, i18n: true },
-      { label: "Title", name: "title", widget: "string", i18n: true },
-      { label: "Description", name: "description", widget: "string", i18n: true },
-      { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-      { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-      { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-      { label: "Author", name: "author", widget: "string", required: false, i18n: true },
-    ]
-    # Add nested and meta objects
-    nested:
-      depth: 3
-      summary: "{{title}}"
-      subfolders: true
-    #meta: { path: { widget: string, label: 'Path', index_file: '_index' } }
-    
-  - name: pages
-    label: "Pages"
-    folder: "content"
-    path: "{{slug}}"
+  - name: public-area-about-medra
+    label: "About mEDRA"
+    folder: "content/public-area/about-medra"
     create: true
     i18n: true
-    #  structure: multiple_files
-    #  locales: [de, en, it]
     fields: [
        { label: "Title", name: "title", widget: "string", i18n: true },
        { label: "Description", name: "description", widget: "string", required: false, i18n: true },
@@ -102,13 +44,33 @@ collections:
        { label: "Content", name: "body", widget: "markdown", i18n: true },
        { label: "Author", name: "author", widget: "string", required: true, i18n: true },
     ]
-    nested:
-      depth: 10
-      summary: "{{title}}"
-      subfolders: false   # pages are leaf files, they don't have their own children
-    meta:
-      path:
-        widget: "string"
-        label: "Path (es. about-medra/team or about-medra/resources/team)"
-        required: true
-    
+
+  - name: public-area-new-users
+    label: "New Users"
+    folder: "content/public-area/new-users"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
+  
+  - name: public-area-technical-documentation
+    label: "Technical Documentation"
+    folder: "content/public-area/technical-documentation"
+    create: true
+    i18n: true
+    fields: [
+       { label: "Title", name: "title", widget: "string", i18n: true },
+       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
+       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
+       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
+       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
+       { label: "Content", name: "body", widget: "markdown", i18n: true },
+       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+    ]
