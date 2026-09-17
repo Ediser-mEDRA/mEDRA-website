@@ -9,5 +9,28 @@
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="../scripts/decap-cms.js"></script>
+    <script>
+      CMS.registerEventListener({
+        name: 'preSave',
+        handler: ({ entry, author }) => {
+          // Extract the GitHub username provided by GitHub OAuth
+          const githubUsername = author.login || author.username || 'Anonymous';
+          console.log('githubUsername: ' + githubUsername);
+          // Get the current form data
+          let data = entry.get('data');
+
+          // 1. If 'author' is empty, this is a new post. Set the creator.
+          if (!data.get('author')) {
+            data = data.set('author', githubUsername);
+          }
+
+          // 2. Always update the 'updater' field with the current user
+          data = data.set('updater', githubUsername);
+
+          // Return the modified data back to Decap CMS
+          return data;
+        },
+      });
+    </script>
   </body>
 </html>
