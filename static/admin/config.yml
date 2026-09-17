@@ -42,7 +42,8 @@ collections:
        { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
        { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
        { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
+       { label: "Author", name: "author", widget: "hidden", required: false, i18n: true },
+       { label: "Last Updated By", name: "author", widget: "hidden", required: false, i18n: true },
     ]
 
   - name: public-area-new-users
