@@ -1,0 +1,49 @@
+{{- /*
+  Breadcrumb completo: Home › Sezione › Sottosezione › … › Pagina corrente.
+  - Mostra SEMPRE tutti gli antenati intermedi (nessuno saltato).
+  - L'ultimo elemento è la pagina corrente (non cliccabile).
+  - Supporta icona personalizzata via `breadcrumb_icon` nel front matter.
+*/ -}}
+{{- $current := . -}}
+
+{{- if not .IsHome -}}
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+
+    {{/* Home */}}
+    <li class="breadcrumb-item">
+      <a href="{{ site.Home.RelPermalink }}">
+        <i class="bi bi-house-door-fill" aria-hidden="true"></i>
+        <span>{{ site.Home.LinkTitle | default "Home" }}</span>
+      </a>
+    </li>
+    <li class="breadcrumb-sep" aria-hidden="true">
+      <i class="bi bi-chevron-right"></i>
+    </li>
+
+    {{/* Tutti gli antenati, dalla radice al parent diretto */}}
+    {{- range .Ancestors.Reverse -}}
+      {{- if not .IsHome -}}
+        {{- $icon := .Params.breadcrumb_icon | default (cond .IsPage "bi-file-earmark-text" "bi-folder2") -}}
+        <li class="breadcrumb-item">
+          <a href="{{ .RelPermalink }}">
+            <i class="bi {{ $icon }}" aria-hidden="true"></i>
+            <span>{{ .LinkTitle }}</span>
+          </a>
+        </li>
+        <li class="breadcrumb-sep" aria-hidden="true">
+          <i class="bi bi-chevron-right"></i>
+        </li>
+      {{- end -}}
+    {{- end -}}
+
+    {{/* Pagina corrente */}}
+    {{- $curIcon := $current.Params.breadcrumb_icon | default (cond $current.IsPage "bi-file-earmark-text" "bi-folder2-open") -}}
+    <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">
+      <i class="bi {{ $curIcon }}" aria-hidden="true"></i>
+      <span>{{ $current.LinkTitle }}</span>
+    </li>
+
+  </ol>
+</nav>
+{{- end -}}

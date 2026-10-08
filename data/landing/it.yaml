@@ -1,0 +1,50 @@
+hero:
+  badge: "Agenzia accreditata DOI Foundation"
+  badge_icon: "bi-check-lg"
+  title_line1: "Identifica e proteggi"
+  title_line2: "la tua proprietà intellettuale"
+  description: |
+    DOI Registry è l'agenzia europea multilingue per la registrazione dei **DOI** — identificatori persistenti per qualsiasi forma di proprietà intellettuale sulle reti digitali.
+  cta_primary:
+    label: "Registra il tuo DOI"
+    url: "#"
+    icon: "bi-box-seam"
+  cta_secondary:
+    label: "Scopri di più"
+    url: "#"
+    icon: "bi-info-circle"
+  cards:
+    - { id: "10.1234", slug: "/book.2024.001",     status: "Registrato", status_icon: "bi-check-lg" }
+    - { id: "10.5678", slug: "/journal.2024.089",  status: "Attivo",     status_icon: "bi-check-lg" }
+    - { id: "10.9012", slug: "/dataset.2024.042",  status: "Verificato", status_icon: "bi-check-lg" }
+
+what_doi:
+  eyebrow: "Cos'è un DOI?"
+  title: "Un link permanente che non si rompe mai"
+  paragraphs:
+    - "Un Digital Object Identifier (DOI) è un identificatore persistente standard ISO che nomina in modo univoco qualsiasi proprietà intellettuale digitale o fisica — libri, articoli, dataset, immagini, audio e altro."
+    - "A differenza degli URL, i DOI rimangono stabili indipendentemente da dove viene spostato o ospitato il contenuto. Consentono la gestione automatica del copyright, la scoperta dei contenuti e il collegamento affidabile delle citazioni."
+  learn_more:
+    label: "Scopri di più sul DOI"
+    url: "#"
+    icon: "bi-arrow-right-circle"
+  example:
+    label: "ESEMPIO DOI"
+    prefix: "10.1392"
+    suffix: "/BC4556.2023.001"
+    legend:
+      - { dot: "yellow", label: "Prefisso — identificatore del registrante" }
+      - { dot: "blue",   label: "Suffisso — identificatore del contenuto" }
+    resolves_url: "https://publisher.com/article/BC4556"
+    standard: "ISO 26324 · ANSI/NISO Z39.84"
+
+partners:
+  title: "Scelto da editori, biblioteche e istituzioni in tutto il mondo"
+  items:
+    - { name: "Zanichelli",          url: "" }
+    - { name: "Carocci Editore",     url: "" }
+    - { name: "Laterza",             url: "" }
+    - { name: "Bollati Boringhieri", url: "" }
+    - { name: "UTET Giuridica",      url: "" }
+    - { name: "Vita e Pensiero",     url: "" }
+    - { name: "Sinaweb",             url: "" }

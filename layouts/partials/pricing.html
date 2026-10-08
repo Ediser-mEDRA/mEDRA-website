@@ -1,0 +1,162 @@
+{{- /*
+  Pricing section — mEDRA DOI Services.
+  Uso: {{ partial "pricing.html" . }}
+  Legge i dati da data/pricing/<lang>.yaml
+*/ -}}
+
+{{- $lang := .Site.Language.Lang -}}
+{{- $P    := index .Site.Data.pricing $lang -}}
+
+{{- if $P -}}
+
+<section id="pricing" class="pricing-section">
+    <div class="container-fixed">
+
+        {{/* ---------- HEADER ---------- */}}
+        <div class="pricing-header">
+            <span class="pricing-eyebrow">{{ $P.header.eyebrow }}</span>
+            <h2 class="pricing-title">{{ $P.header.title }}</h2>
+            <p class="pricing-subtitle">{{ $P.header.subtitle }}</p>
+        </div>
+
+        {{/* ---------- STARTUP BANNER ---------- */}}
+        <div class="pricing-startup">
+            <div class="pricing-startup__icon">
+                <i class="bi {{ $P.startup.icon }}" aria-hidden="true"></i>
+            </div>
+            <div class="pricing-startup__body">
+                <h3 class="pricing-startup__title">{{ $P.startup.title }}</h3>
+                <p class="pricing-startup__text">{{ $P.startup.text }}</p>
+            </div>
+        </div>
+
+        {{/* ---------- MAIN TABLE ---------- */}}
+        <div class="pricing-table-wrap">
+            <table class="pricing-table">
+                <colgroup>
+                    <col class="c-bracket">
+                    <col class="c-fee">
+                    <col class="c-included">
+                    <col class="c-excess">
+                    <col class="c-action">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th scope="col">{{ $P.main_table.columns.bracket }}</th>
+                        <th scope="col" class="col-fee">{{ $P.main_table.columns.fee }}</th>
+                        <th scope="col">{{ $P.main_table.columns.included }}</th>
+                        <th scope="col" class="col-excess">
+                            {{ $P.main_table.columns.excess }}
+                            <span class="th-sub">{{ $P.main_table.columns.excess_sub }}</span>
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{- range $P.main_table.rows -}}
+                    <tr{{ if .popular }} class="pricing-row--popular"{{ end }}>
+                        <th scope="row">
+                            <span class="bracket-num">{{ .bracket }}</span>
+                            {{- if .popular }}<span class="popular-badge">{{ $P.main_table.columns.popular_label }}</span>{{ end -}}
+                        </th>
+                        <td class="col-fee price-cell">{{ .fee }}</td>
+                        <td>{{ .included }}</td>
+                        <td class="col-excess price-cell price-cell--muted">{{ .excess }}</td>
+                        <td class="col-action">
+                            <a href="{{ .cta_url }}" class="btn-pricing{{ if .popular }} btn-pricing--primary{{ end }}">
+                                {{ $P.main_table.columns.cta }}
+                            </a>
+                        </td>
+                    </tr>
+                    {{- end -}}
+                </tbody>
+            </table>
+        </div>
+
+        {{/* ---------- ADD-ON TABLES ---------- */}}
+        {{- range $P.addon_tables -}}
+            {{- $tbl := . -}}
+            <div class="addon-block addon-block--{{ $tbl.key }}">
+                <div class="addon-head">
+                    <h3 class="addon-head__title">{{ $tbl.title }}</h3>
+                    <p class="addon-head__subtitle">{{ $tbl.subtitle }}</p>
+                </div>
+
+                <div class="addon-table-scroll">
+                    <table class="addon-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                {{- range $tbl.brackets -}}
+                                    <th scope="col">{{ . }}</th>
+                                {{- end -}}
+                                {{- if $tbl.note -}}
+                                    <th scope="col" rowspan="{{ add (len $tbl.rows) 1 }}" class="note-cell">
+                                        {{ $tbl.note }}
+                                    </th>
+                                {{- end -}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{- range $tbl.rows -}}
+                                {{- $row := . -}}
+                                <tr>
+                                    <th scope="row">{{ $row.label | markdownify }}</th>
+
+                                    {{/* Caso 1: values piatto (CrossRef + prima riga Similarity) */}}
+                                    {{- if $row.values -}}
+                                        {{- range $row.values -}}
+                                            <td class="val">{{ . }}</td>
+                                        {{- end -}}
+
+                                    {{/* Caso 2: gruppi con colspan (Similarity Check — seconda riga) */}}
+                                    {{- else if $row.groups -}}
+                                        {{- range $row.groups -}}
+                                            {{- $g := . -}}
+                                            {{- if $g.items -}}
+                                                <td class="multi" colspan="{{ $g.colspan }}">
+                                                    {{- range $g.items -}}
+                                                        <div class="row-line">
+                                                            <span>{{ .text }}</span>
+                                                            <strong>{{ .price }}</strong>
+                                                        </div>
+                                                    {{- end -}}
+                                                </td>
+                                            {{- else -}}
+                                                <td class="multi" colspan="{{ $g.colspan }}"></td>
+                                            {{- end -}}
+                                        {{- end -}}
+                                    {{- end -}}
+                                </tr>
+                            {{- end -}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {{- end -}}
+
+        {{/* ---------- NOTES ---------- */}}
+        <div class="pricing-notes">
+            <h4 class="pricing-notes__title">
+                <i class="bi bi-info-circle" aria-hidden="true"></i> {{ $P.notes.title }}
+            </h4>
+            <ul class="pricing-notes__list">
+                {{- range $P.notes.items -}}
+                    <li>{{ . | markdownify }}</li>
+                {{- end -}}
+            </ul>
+        </div>
+
+        {{/* ---------- CTA ---------- */}}
+        <div class="pricing-cta">
+            <a href="{{ $P.cta.url }}" class="btn-pricing-cta">
+                <i class="bi {{ $P.cta.icon }} me-2" aria-hidden="true"></i>
+                {{ $P.cta.label }}
+            </a>
+            <p class="pricing-cta__note">{{ $P.cta.note | markdownify }}</p>
+        </div>
+
+    </div>
+</section>
+
+{{- end -}}

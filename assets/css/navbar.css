@@ -1,0 +1,268 @@
+/* --- NAVBAR --- */
+.navbar-glass {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-bs-theme="dark"] .navbar-glass {
+    background-color: rgba(18, 18, 18, 0.85) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.fixed-header.scrolled .navbar-glass {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+
+[data-bs-theme="dark"] .fixed-header.scrolled .navbar-glass {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+}
+
+
+.navbar-brand-logo .m { 
+    color: var(--medra-orange); 
+    font-style: italic; 
+}
+
+.navbar-brand-logo .e { 
+    color: var(--medra-blue); 
+}
+
+[data-bs-theme="dark"] .navbar-brand-logo .e { 
+    color: #4da3ff; 
+}
+
+[data-bs-theme="dark"] .navbar-brand-logo .m { 
+    color: #ffa500; 
+}
+
+/* NAV LINK */
+.nav-link {
+    position: relative;
+    color: var(--bs-body-color);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.25s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 6px; 
+    left: 50%; 
+    width: 0; 
+    height: 2px;
+    background-color: var(--medra-orange);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover, 
+.nav-link:focus-visible { 
+    color: var(--medra-orange) !important; 
+}
+
+.nav-link:hover::after, 
+.nav-link:focus-visible::after {
+    width: calc(100% - 2rem);
+    left: 1rem;
+}
+
+.nav-link.active { 
+    color: var(--medra-orange) !important; 
+}
+
+.nav-link.active::after {
+    width: calc(100% - 2rem);
+    left: 1rem;
+}
+
+/* Reset caret Bootstrap sui .nav-link.dropdown-toggle */
+.nav-link.dropdown-toggle::after {
+    border: none;
+    margin-left: 0;
+    vertical-align: baseline;
+    transform: none;
+}
+
+/* ===================================================
+    SOLID TRIANGLE CARET (identico al lang dropdown)
+=================================================== */
+.nav-link.dropdown-toggle::before,
+.medra-submenu > .dropdown-item::after {
+    content: '';
+    display: inline-block;
+    vertical-align: 0.255em;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+    transition: transform 0.3s ease, opacity 0.25s ease;
+}
+
+.nav-link.dropdown-toggle::before {
+    order: 2;
+    margin-left: 0.5em;
+    opacity: 0.65;
+}
+
+.nav-link.dropdown-toggle:hover::before,
+.nav-link.dropdown-toggle:focus-visible::before {
+    opacity: 1;
+}
+.nav-link.dropdown-toggle[aria-expanded="true"]::before {
+    transform: rotate(180deg);
+}
+
+/* ===================================================
+    UNIVERSAL DROPDOWN STYLE (.medra-dropdown)
+    Palette: VERDE SALVIA RAFFINATA
+=================================================== */
+.medra-dropdown {
+    border: 1px solid var(--pale-green-divider);
+    border-radius: 14px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    min-width: 260px;
+    background: linear-gradient(180deg,
+        var(--pale-green-top) 0%,
+        var(--pale-green-bottom) 100%);
+    color: var(--pale-green-text);
+    box-shadow: inset 0 1px 0 var(--pale-green-highlight),
+                inset 0 -1px 0 var(--pale-green-shadow),
+                0 14px 38px rgba(31, 46, 26, 0.18);
+    animation: dropdownFade 0.25s ease both;
+}
+
+[data-bs-theme="dark"] .medra-dropdown {
+    box-shadow: inset 0 1px 0 var(--pale-green-highlight),
+                inset 0 -1px 0 var(--pale-green-shadow),
+                0 14px 38px rgba(0, 0, 0, 0.65);
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.medra-dropdown .dropdown-item {
+    width: 100%;
+    border-radius: 9px;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--pale-green-text);
+    gap: 0.6rem;
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+}
+
+.medra-dropdown .dropdown-item i {
+    color: var(--medra-orange);
+    font-size: 1rem;
+    transition: transform 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+}
+
+.medra-dropdown .dropdown-item:hover,
+.medra-dropdown .dropdown-item:focus-visible,
+.medra-dropdown .dropdown-item.active {
+    background-color: var(--pale-green-highlight);
+    color: var(--medra-orange-dark);
+    transform: translateX(3px);
+}
+
+[data-bs-theme="dark"] .medra-dropdown .dropdown-item:hover,
+[data-bs-theme="dark"] .medra-dropdown .dropdown-item:focus-visible,
+[data-bs-theme="dark"] .medra-dropdown .dropdown-item.active {
+    color: var(--medra-orange);
+}
+
+.medra-dropdown .dropdown-item:hover i,
+.medra-dropdown .dropdown-item:focus-visible i {
+    transform: scale(1.15) rotate(-6deg);
+}
+
+.medra-dropdown .dropdown-divider {
+    margin: 0.4rem 0.5rem;
+    border-top-color: var(--pale-green-divider);
+    opacity: 1;
+}
+
+.medra-dropdown .dropdown-item .lang-check {
+    margin-left: auto;
+    color: var(--medra-orange);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.medra-dropdown .dropdown-item.is-active .lang-check { 
+    opacity: 1; 
+}
+
+/* ===================================================
+    SUBMENU — apre a DESTRA, dopo il caret
+    =================================================== */
+.medra-submenu {
+    position: relative;
+}
+
+.medra-submenu > .dropdown-item::after {
+    margin-left: auto;
+    opacity: 0.55;
+    transform: rotate(0deg);
+}
+
+.medra-submenu:hover > .dropdown-item::after,
+.medra-submenu:focus-within > .dropdown-item::after {
+    opacity: 1;
+    transform: rotate(-90deg);
+}
+
+@media (min-width: 992px) {
+    .medra-submenu > .medra-dropdown {
+        position: absolute;
+        top: -0.5rem;
+        left: 100%;
+        margin: 0 0 0 0.35rem;
+        display: none;
+        animation: submenuFade 0.22s ease both;
+    }
+
+    .medra-submenu:hover > .medra-dropdown,
+    .medra-submenu:focus-within > .medra-dropdown {
+        display: block;
+    }
+
+    .medra-submenu-far-right > .medra-dropdown {
+        left: 100%;
+        margin-left: 100%;
+        margin-top: -2.48rem;
+    }
+}
+
+@keyframes submenuFade {
+    from { 
+        opacity: 0; 
+        transform: translateX(-8px); 
+    }
+
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .dropdown-menu.medra-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    .navbar-nav .dropdown-menu.medra-dropdown.dropdown-menu-end {
+        left: 50%;
+        right: 0;
+    }
+}

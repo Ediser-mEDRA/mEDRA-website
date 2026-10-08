@@ -1,0 +1,9 @@
+{{ $ul := slice }}
+<ul class="section-links">
+  {{ range .Page.Sections.ByWeight }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </li>
+  {{ end }}
+</ul>

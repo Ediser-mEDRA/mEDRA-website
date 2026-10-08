@@ -1,8 +1,34 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-  {{ end }}
+<section class="page-shell">
+  <div class="container">
+    {{ partial "breadcrumb.html" . }}
+    <div class="page-layout">
+      {{ partial "section-sidebar.html" . }}
+      <article class="page-main card-glass">
+        <header class="page-header">
+          <h1 class="page-title">{{ .Title }}</h1>
+          {{ with .Params.description }}<p class="page-description">{{ . }}</p>{{ end }}
+          <div class="title-rule"></div>
+        </header>
+        {{ with .Content }}<div class="page-content">{{ . }}</div>{{ end }}
+
+        {{- $children := cond (gt (len .Sections) 0) .Sections .RegularPages -}}
+        {{- if gt (len $children) 0 -}}
+          <div class="page-grid">
+            {{- range $children.ByWeight -}}
+              <a href="{{ .RelPermalink }}" class="page-grid__item">
+                <span class="page-grid__icon"><i class="bi {{ .Params.icon | default "bi-file-earmark-text" }}"></i></span>
+                <span class="page-grid__body">
+                  <span class="page-grid__title">{{ .LinkTitle }}</span>
+                  {{- with .Params.description }}<span class="page-grid__desc">{{ . }}</span>{{ end }}
+                </span>
+                <span class="page-grid__arrow"><i class="bi bi-arrow-right"></i></span>
+              </a>
+            {{- end -}}
+          </div>
+        {{- end -}}
+      </article>
+    </div>
+  </div>
+</section>
 {{ end }}

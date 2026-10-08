@@ -1,0 +1,76 @@
+{{- /*
+  Renders ONE <nav class="side-group"> for a section and all its children.
+
+  Params:
+    - item    (Page)    : the section whose children become side-links
+    - current (string)  : current page RelPermalink (for active state)
+    - level   (int)     : optional, kept for compatibility (default 1)
+
+  Front matter supported:
+
+    On the SECTION (_index.md):
+      - side_label   (string) : preferred label (falls back to menu_title → title)
+      - side_icon    (string) : Bootstrap icon, WITHOUT "bi " prefix (e.g. "bi-building")
+      - weight       (int)    : ordering of groups (managed in parent template)
+
+    On each CHILD page:
+      - title        (string) : fallback label
+      - menu_title   (string) : preferred label
+      - icon         (string) : Bootstrap icon WITHOUT "bi " prefix (e.g. "bi-people")
+      - external_url (string) : if set, uses this URL and opens in new tab
+      - weight       (int)    : ordering within the group
+*/ -}}
+
+{{- $item    := .item -}}
+{{- $current := .current | default "" -}}
+
+{{- if $item -}}
+
+  {{/* ---- Group metadata ---- */}}
+  {{- $gIcon  := $item.Params.side_icon  | default $item.Params.icon | default "bi-folder2-open" -}}
+  {{- $gLabel := $item.Params.side_label | default $item.Params.menu_title | default $item.Title -}}
+  {{- $gId    := printf "side-%s" (urlize $gLabel) -}}
+  {{- $children := $item.Pages -}}
+
+  <nav class="side-group" aria-labelledby="{{ $gId }}">
+    <h2 class="side-title" id="{{ $gId }}">
+      <i class="bi {{ $gIcon }}" aria-hidden="true"></i>
+      <span>{{ $gLabel }}</span>
+    </h2>
+
+    {{- if gt (len $children) 0 -}}
+    <ul class="side-menu">
+      {{- range $children.ByWeight -}}
+
+        {{- $child      := . -}}
+        {{- $url        := $child.RelPermalink -}}
+        {{- $extUrl     := $child.Params.external_url | default "" -}}
+        {{- $href       := cond (ne $extUrl "") $extUrl $url -}}
+        {{- $isExternal := ne $extUrl "" -}}
+        {{- $cLabel     := $child.Params.menu_title | default $child.Title -}}
+        {{- $cIcon      := $child.Params.icon | default "bi-dot" -}}
+
+        {{- $isActive := and
+            (not $isExternal)
+            (or
+              (eq $current $url)
+              (and (ne $url "/") (ne $url "") (hasPrefix $current $url))
+            )
+        -}}
+
+        <li>
+          <a href="{{ $href }}"
+             class="side-link{{ if $isActive }} active{{ end }}"
+             {{ if $isActive }}aria-current="page"{{ end }}
+             {{ if $isExternal }}target="_blank" rel="noopener noreferrer"{{ end }}>
+            <i class="bi {{ $cIcon }}" aria-hidden="true"></i>
+            <span>{{ $cLabel }}</span>
+          </a>
+        </li>
+
+      {{- end -}}
+    </ul>
+    {{- end -}}
+  </nav>
+
+{{- end -}}

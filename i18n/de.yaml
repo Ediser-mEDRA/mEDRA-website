@@ -1,0 +1,84 @@
+- id: home
+  translation: "Home"
+- id: services
+  translation: "Services"
+- id: contact
+  translation: "Contact"
+- id: select_language
+  translation: "Select language"
+- id: toggle_dark_mode
+  translation: "Toggle dark mode"
+- id: skip_to_content
+  translation: "Skip to main content"
+- id: topbar_email_aria
+  translation: "Send us an email at"
+- id: social_links_aria
+  translation: "Social media links"
+- id: main_navigation
+  translation: "Main navigation"
+- id: toggle_navigation
+  translation: "Toggle navigation menu"
+- id: learn_more
+  translation: "Learn more"
+- id: our_services
+  translation: "Our Services"
+- id: hero_cta_primary
+  translation: "Discover services"
+- id: hero_cta_secondary
+  translation: "Contact us"
+- id: contact_section_desc
+  translation: "Want to know more about our services? Write us."
+- id: send_email_aria
+  translation: "Send us an email"
+- id: footer_description
+  translation: "A brand of EDISER, the service company of the Italian Publishers Association. Official DOI Registration Agency and IDF member."
+- id: footer_doi_services
+  translation: "DOI Services"
+- id: footer_about
+  translation: "About"
+- id: footer_resources
+  translation: "Resources"
+- id: footer_contact
+  translation: "Contact"
+- id: footer_link_register
+  translation: "Register a DOI"
+- id: footer_link_search
+  translation: "Search Metadata"
+- id: footer_link_editor
+  translation: "Web Editor"
+- id: footer_link_citation
+  translation: "Citation Formatter"
+- id: footer_link_api
+  translation: "API Access"
+- id: footer_link_who
+  translation: "Who We Are"
+- id: footer_link_org
+  translation: "Organisation"
+- id: footer_link_gov
+  translation: "Governance"
+- id: footer_link_reports
+  translation: "Annual Reports"
+- id: footer_link_partners
+  translation: "Partners"
+- id: footer_link_docs
+  translation: "Documentation"
+- id: footer_link_standards
+  translation: "Metadata Standards"
+- id: footer_link_faq
+  translation: "FAQ"
+- id: footer_link_guides
+  translation: "User Guides"
+- id: footer_link_downloads
+  translation: "Downloads"
+- id: footer_link_home
+  translation: "Home"
+- id: footer_link_public
+  translation: "Public Area"
+- id: footer_link_registered
+  translation: "Registered Users Area"
+- id: footer_link_privacy
+  translation: "Privacy"
+- id: rights
+  translation: "All rights reserved."
+- id: footer_links_aria
+  translation: "Footer links"

@@ -1,0 +1,99 @@
+{{- /*
+  Sidebar di contesto — mostra SEMPRE il contenitore padre dell'elemento
+  in oggetto:
+
+    • Pagina  → mostra la sezione di appartenenza + tutte le sue pagine
+    • Sezione → mostra la sezione GENITORE + tutte le sue sottosezioni e pagine
+                 (se la sezione è top-level, mostra sé stessa)
+
+  Ogni voce evidenzia automaticamente l'elemento corrente.
+*/ -}}
+
+{{- $ctx     := . -}}
+{{- $current := $ctx.RelPermalink -}}
+
+{{/* ---------- Trova il "contenitore padre" ---------- */}}
+{{- $parent := "" -}}
+
+{{- if $ctx.IsPage -}}
+  {{/* Pagina → la sua sezione */}}
+  {{- $parent = $ctx.CurrentSection -}}
+{{- else -}}
+  {{/* Sezione → la sezione genitore (o sé stessa se top-level) */}}
+  {{- $up := $ctx.Parent -}}
+  {{- if and $up (not $up.IsHome) -}}
+    {{- $parent = $up -}}
+  {{- else -}}
+    {{- $parent = $ctx -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $parent -}}
+
+  {{/* Figli ordinati: prima le sottosezioni, poi le pagine */}}
+  {{- $subsections := $parent.Sections.ByWeight -}}
+  {{- $pages       := $parent.RegularPages.ByWeight -}}
+
+  <aside class="section-sidebar" aria-label="Navigazione di sezione">
+    <div class="side-panel">
+
+      <nav class="side-group" aria-labelledby="sectionNavTitle">
+
+        <h2 class="side-title" id="sectionNavTitle">
+          <i class="bi {{ $parent.Params.side_icon | default (cond $parent.IsPage "bi-file-earmark-text" "bi-folder2-open") }}" aria-hidden="true"></i>
+          <span>{{ $parent.Params.side_label | default $parent.LinkTitle }}</span>
+        </h2>
+
+        <ul class="side-menu">
+
+          {{/* --- SOTTOSEZIONI --- */}}
+          {{- range $subsections -}}
+            {{- $url    := .RelPermalink -}}
+            {{- $isActive := or (eq $current $url) (and (ne $url "/") (hasPrefix $current $url)) -}}
+            {{- $label  := .Params.menu_title | default .LinkTitle -}}
+            {{- $icon   := .Params.icon | default "bi-folder2-open" -}}
+            {{- $extUrl := .Params.external_url | default "" -}}
+            {{- $href   := cond (ne $extUrl "") $extUrl $url -}}
+            {{- $isExt  := ne $extUrl "" -}}
+
+            <li>
+              <a href="{{ $href }}"
+                 class="side-link side-link--section{{ if and $isActive (not $isExt) }} active{{ end }}"
+                 {{ if and $isActive (not $isExt) }}aria-current="page"{{ end }}
+                 {{ if $isExt }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                <i class="bi {{ $icon }}" aria-hidden="true"></i>
+                <span>{{ $label }}</span>
+                <i class="bi bi-chevron-right side-link__arrow ms-auto" aria-hidden="true"></i>
+              </a>
+            </li>
+          {{- end -}}
+
+          {{/* --- PAGINE --- */}}
+          {{- range $pages -}}
+            {{- $url    := .RelPermalink -}}
+            {{- $isActive := eq $current $url -}}
+            {{- $label  := .Params.menu_title | default .LinkTitle -}}
+            {{- $icon   := .Params.icon | default "bi-file-earmark-text" -}}
+            {{- $extUrl := .Params.external_url | default "" -}}
+            {{- $href   := cond (ne $extUrl "") $extUrl $url -}}
+            {{- $isExt  := ne $extUrl "" -}}
+
+            <li>
+              <a href="{{ $href }}"
+                 class="side-link{{ if and $isActive (not $isExt) }} active{{ end }}"
+                 {{ if and $isActive (not $isExt) }}aria-current="page"{{ end }}
+                 {{ if $isExt }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                <i class="bi {{ $icon }}" aria-hidden="true"></i>
+                <span>{{ $label }}</span>
+              </a>
+            </li>
+          {{- end -}}
+
+        </ul>
+
+      </nav>
+
+    </div>
+  </aside>
+
+{{- end -}}

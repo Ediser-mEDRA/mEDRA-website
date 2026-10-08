@@ -1,0 +1,94 @@
+topbar:
+  email: support@medra.org
+  socials:
+    - key: linkedin
+      url: https://www.linkedin.com/company/medra
+      icon: bi-linkedin
+      external: true
+    - key: github
+      url: https://www.github.com/Ediser-mEDRA
+      icon: bi-github
+      external: true
+    - key: youtube
+      url: https://www.youtube.com/medra
+      icon: bi-youtube
+      external: true
+    - key: rss
+      url: /feed.xml
+      icon: bi-rss
+      external: false
+      divider: true
+footer:
+  brand:
+    socials:
+      - key: twitter
+        url: https://twitter.com/medra_org
+        icon: bi-twitter-x
+        external: true
+      - key: linkedin
+        url: https://www.linkedin.com/company/medra
+        icon: bi-linkedin
+        external: true
+      - key: email
+        url: mailto:info@medra.org
+        icon: bi-envelope-fill
+        external: false
+      - key: rss
+        url: /feed.xml
+        icon: bi-rss
+        external: false
+  company:
+    name: EDISER SRL
+    address: Corso di Porta Romana, 108 — 20122 Milan, Italy
+    vat: VAT 03763520966
+    phone: (+39) 02 89280801
+    email: ediser@ediser.it
+  columns:
+    - title_key: footer_doi_services
+      links:
+        - text_key: footer_link_register
+          url: "#"
+        - text_key: footer_link_search
+          url: "#"
+        - text_key: footer_link_editor
+          url: "#"
+        - text_key: footer_link_citation
+          url: "#"
+        - text_key: footer_link_api
+          url: "#"
+    - title_key: footer_about
+      links:
+        - text_key: footer_link_who
+          url: "#"
+        - text_key: footer_link_org
+          url: "#"
+        - text_key: footer_link_gov
+          url: "#"
+        - text_key: footer_link_reports
+          url: "#"
+        - text_key: footer_link_partners
+          url: "#"
+    - title_key: footer_resources
+      links:
+        - text_key: footer_link_docs
+          url: "#"
+        - text_key: footer_link_standards
+          url: "#"
+        - text_key: footer_link_faq
+          url: "#"
+        - text_key: footer_link_guides
+          url: "#"
+        - text_key: footer_link_downloads
+          url: "#"
+  contact:
+    phone: +39 02 5506191
+    email: support@medra.org
+  bottom_links:
+    - text_key: footer_link_home
+      url: /
+    - text_key: footer_link_public
+      url: "#"
+    - text_key: footer_link_registered
+      url: "#"
+    - text_key: footer_link_privacy
+      url: "#"

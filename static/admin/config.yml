@@ -4,193 +4,558 @@ backend:
   branch: develop
   base_url: https://www-medra-dev.medra.org
   auth_endpoint: auth
-  #causes all commits to be “squashed” into a single commit when the pull request is merged
   squash_merges: true
 
 local_backend: true
+
 display_url: https://ediser-medra.github.io/mEDRA-website
+
+show_preview_links: true
+search: true
+locale: en
 
 logo:
   src: https://ediser-medra.github.io/mEDRA-website/images/medra-without-text-logo-removebg-preview.png
   show_in_header: true
-  
+
 publish_mode: editorial_workflow
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 slug:
-  encoding: "ascii"
+  encoding: ascii
   clean_accents: true
   sanitize_replacement: "-"
 
-i18n:
-  structure: multiple_folders
-  locales: [de, en, it]
-  default_locale: en
-  
+# ------------------------------------------------------------------
+# Shared fields (YAML anchor, reused by every language collection)
+# ------------------------------------------------------------------
+shared_fields: &shared_fields
+  - label: "Content type"
+    name: "type"
+    widget: "select"
+    options:
+      - { label: "Section",    value: "section" }
+      - { label: "Subsection", value: "subsection" }
+      - { label: "Page",       value: "page" }
+    default: "page"
+    hint: "Sections and subsections should be top-level folders. Pages live inside them."
+
+  - { label: "Title", name: "title", widget: "string" }
+  - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-link-45deg", hint: "Es. bi-link-45deg, bi-pencil-square, bi-search, bi-arrow-left-right, bi-quote, bi-code-slash" }
+  - { label: "Menu title", name: "menu_title", widget: "string", required: false }
+  - { label: "Description", name: "description", widget: "text", required: false }
+  - { label: "Translation key", name: "translationKey", widget: "string", required: false, hint: "Use the SAME key across languages to link translations." }
+  - { label: "Weight", name: "weight", widget: "number", value_type: "int", default: 10 }
+  - { label: "Image", name: "image", widget: "image", required: false }
+  - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  - { label: "Body", name: "body", widget: "markdown", required: false }
+
+# ------------------------------------------------------------------
+# Collections — one per language
+# ------------------------------------------------------------------
 collections:
-  - name: public-area-about-medra
-    label: "About mEDRA"
-    folder: "content/public-area/about-medra"
+  # ENGLISH
+  - name: "pages_en"
+    label: "English content"
+    label_singular: "English entry"
+    folder: "content/en"
     create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
 
-  - name: public-area-new-users
-    label: "New Users"
-    folder: "content/public-area/new-users"
+    nested:
+      depth: 100
+      summary: "{{title}}  ·  {{type}}"
+      subfolders: true
+    meta:
+      path:
+        widget: string
+        label: "Parent folder"
+        hint: "e.g. 'about/team' — leave empty for top level. The entry is saved as <parent-folder>/<slug>/_index.md"
+        index_file: "_index"
+
+    view_filters:
+      - label: "Sections only"
+        field: type
+        pattern: "section"
+      - label: "Subsections only"
+        field: type
+        pattern: "subsection"
+      - label: "Pages only"
+        field: type
+        pattern: "page"
+
+    fields: *shared_fields
+
+  # GERMAN
+  - name: "pages_de"
+    label: "German content"
+    label_singular: "German entry"
+    folder: "content/de"
     create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    nested:
+      depth: 100
+      summary: "{{title}}  ·  {{type}}"
+      subfolders: true
+    meta:
+      path:
+        widget: string
+        label: "Parent folder"
+        hint: "e.g. 'about/team' — leave empty for top level."
+        index_file: "_index"
+    view_filters:
+      - { label: "Sections only",    field: type, pattern: "section" }
+      - { label: "Subsections only", field: type, pattern: "subsection" }
+      - { label: "Pages only",       field: type, pattern: "page" }
+    fields: *shared_fields
+
+  # ITALIAN
+  - name: "pages_it"
+    label: "Italian content"
+    label_singular: "Italian entry"
+    folder: "content/it"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    nested:
+      depth: 100
+      summary: "{{title}}  ·  {{type}}"
+      subfolders: true
+    meta:
+      path:
+        widget: string
+        label: "Parent folder"
+        hint: "e.g. 'about/team' — leave empty for top level."
+        index_file: "_index"
+    view_filters:
+      - { label: "Sections only",    field: type, pattern: "section" }
+      - { label: "Subsections only", field: type, pattern: "subsection" }
+      - { label: "Pages only",       field: type, pattern: "page" }
+    fields: *shared_fields
   
-  - name: public-area-technical-documentation
-    label: "Technical Documentation"
-    folder: "content/public-area/technical-documentation"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+  # ================================================================
+  # SERVIZI — aggiungi / modifica / riordina
+  # ================================================================
+  - name: "services"
+    label: "Services"
+    files:
+      - name: "services_en"
+        label: "English — Services"
+        file: "data/services/en.yaml"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", default: "Our Services" }
+          - { label: "Titolo sezione", name: "title", widget: "string", default: "Everything you need to manage DOIs" }
+          - label: "Servizi"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-link-45deg", hint: "Es. bi-link-45deg, bi-pencil-square, bi-search, bi-arrow-left-right, bi-quote, bi-code-slash" }
+              - { label: "Titolo", name: "title", widget: "string" }
+              - { label: "Descrizione", name: "description", widget: "text" }
+              - { label: "Testo link", name: "link_text", widget: "string", default: "Get started" }
+              - { label: "URL link", name: "link_url", widget: "string" }
+      - name: "services_it"
+        label: "Italian — Services"
+        file: "data/services/it.yaml"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", default: "I nostri servizi" }
+          - { label: "Titolo sezione", name: "title", widget: "string", default: "Tutto ciò di cui hai bisogno per gestire i DOI" }
+          - label: "Servizi"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-link-45deg", hint: "Es. bi-link-45deg, bi-pencil-square, bi-search, bi-arrow-left-right, bi-quote, bi-code-slash" }
+              - { label: "Titolo", name: "title", widget: "string" }
+              - { label: "Descrizione", name: "description", widget: "text" }
+              - { label: "Testo link", name: "link_text", widget: "string", default: "Inizia" }
+              - { label: "URL link", name: "link_url", widget: "string" }
+  # ================================================================
+  # NEWS — featured + lista dinamica
+  # ================================================================
+  - name: "news"
+    label: "News & Annunci"
+    files:
+      - name: "news_en"
+        label: "English — News"
+        file: "data/news/en.yaml"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", default: "News & Announcements" }
+          - { label: "Titolo sezione", name: "title", widget: "string", default: "News & Announcements" }
+          - { label: "Link 'View all'", name: "view_all_url", widget: "string", required: false }
+          - label: "News in evidenza (featured)"
+            name: "featured"
+            widget: "object"
+            fields:
+              - { label: "Badge",     name: "badge",     widget: "string", default: "Latest News" }
+              - { label: "Data",      name: "date",      widget: "string", hint: "Testo libero, es. 'May 15, 2024'" }
+              - { label: "Titolo",    name: "title",     widget: "string" }
+              - { label: "Estratto",  name: "excerpt",   widget: "text" }
+              - { label: "Testo link", name: "link_text", widget: "string", default: "Read full notice" }
+              - { label: "URL link",   name: "link_url",  widget: "string" }
+          - label: "Altre news"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.category}} — {{fields.title}}"
+            fields:
+              - { label: "Categoria",  name: "category",  widget: "string",
+                  hint: "Es. Tech Update, Compliance, Event, Standards" }
+              - { label: "Titolo",     name: "title",     widget: "string" }
+              - { label: "Estratto",   name: "excerpt",   widget: "text" }
+              - { label: "Data",       name: "date",      widget: "string" }
+              - { label: "URL",        name: "link_url",  widget: "string" }
 
-  - name: reserved-area-account-management
-    label: "Account Management 🔐"
-    folder: "content/reserved/account-management"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+      - name: "news_it"
+        label: "Italiano — News"
+        file: "data/news/it.yaml"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", default: "News & Comunicazioni" }
+          - { label: "Titolo sezione", name: "title", widget: "string", default: "News & Comunicazioni" }
+          - { label: "Link 'View all'", name: "view_all_url", widget: "string", required: false }
+          - label: "News in evidenza (featured)"
+            name: "featured"
+            widget: "object"
+            fields:
+              - { label: "Badge",     name: "badge",     widget: "string", default: "Ultima news" }
+              - { label: "Data",      name: "date",      widget: "string" }
+              - { label: "Titolo",    name: "title",     widget: "string" }
+              - { label: "Estratto",  name: "excerpt",   widget: "text" }
+              - { label: "Testo link", name: "link_text", widget: "string", default: "Leggi tutto" }
+              - { label: "URL link",   name: "link_url",  widget: "string" }
+          - label: "Altre news"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.category}} — {{fields.title}}"
+            fields:
+              - { label: "Categoria",  name: "category",  widget: "string" }
+              - { label: "Titolo",     name: "title",     widget: "string" }
+              - { label: "Estratto",   name: "excerpt",   widget: "text" }
+              - { label: "Data",       name: "date",      widget: "string" }
+              - { label: "URL",        name: "link_url",  widget: "string" }
+  # SETTINGS SITE
+  - name: "settings"
+    label: "Site settings"
+    files:
+      - name: "site"
+        label: "Topbar, Social, Footer"
+        file: "data/site.yaml"
+        fields:
+          - label: "Topbar"
+            name: "topbar"
+            widget: "object"
+            fields:
+              - { label: "Email principale", name: "email", widget: "string" }
+              - label: "Social topbar"
+                name: "socials"
+                widget: "list"
+                summary: "{{fields.key}}"
+                fields:
+                  - { label: "Chiave (GitHub/linkedin/...)", name: "key", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-link" }
+                  - { label: "Apri in nuova scheda", name: "external", widget: "boolean", default: true }
+                  - { label: "Separatore prima", name: "divider", widget: "boolean", required: false, default: false }
 
-  - name: reserved-area-doi-registration
-    label: "DOI Registration 🔐"
-    folder: "content/reserved/doi-registration"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - label: "Brand — Social"
+                name: "brand"
+                widget: "object"
+                fields:
+                  - label: "Social footer"
+                    name: "socials"
+                    widget: "list"
+                    summary: "{{fields.key}}"
+                    fields:
+                      - { label: "Chiave", name: "key", widget: "string" }
+                      - { label: "URL", name: "url", widget: "string" }
+                      - { label: "Icona", name: "icon", widget: "string" }
+                      - { label: "Apri in nuova scheda", name: "external", widget: "boolean", default: false }
+              - label: "Dati azienda"
+                name: "company"
+                widget: "object"
+                fields:
+                  - { label: "Ragione sociale", name: "name", widget: "string" }
+                  - { label: "Indirizzo", name: "address", widget: "string" }
+                  - { label: "Partita IVA", name: "vat", widget: "string" }
+                  - { label: "Telefono", name: "phone", widget: "string" }
+                  - { label: "Email", name: "email", widget: "string" }
+              - label: "Colonne link"
+                name: "columns"
+                widget: "list"
+                summary: "{{fields.title_key}}"
+                fields:
+                  - { label: "Chiave titolo (i18n)", name: "title_key", widget: "string" }
+                  - label: "Link"
+                    name: "links"
+                    widget: "list"
+                    fields:
+                      - { label: "Chiave testo (i18n)", name: "text_key", widget: "string" }
+                      - { label: "URL", name: "url", widget: "string" }
+              - label: "Contatti diretti footer"
+                name: "contact"
+                widget: "object"
+                fields:
+                  - { label: "Telefono", name: "phone", widget: "string" }
+                  - { label: "Email", name: "email", widget: "string" }
+              - label: "Link barra inferiore"
+                name: "bottom_links"
+                widget: "list"
+                fields:
+                  - { label: "Chiave testo (i18n)", name: "text_key", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
   
-  - name: reserved-area-doi-url-update
-    label: "DOI URL Update 🔐"
-    folder: "content/reserved/doi-url-update"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+  # ================================================================
+  # LANDING — Hero, What is a DOI, Partners
+  # ================================================================
+  - name: "landing"
+    label: "Landing — Hero, DOI, Partners"
+    files:
+      - name: "landing_en"
+        label: "English — Landing"
+        file: "data/landing/en.yaml"
+        fields:
+          # ---------------- HERO ----------------
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Badge — testo", name: "badge", widget: "string" }
+              - { label: "Badge — icona", name: "badge_icon", widget: "string", default: "bi-check-lg" }
+              - { label: "Titolo — riga 1", name: "title_line1", widget: "string" }
+              - { label: "Titolo — riga 2 (accento)", name: "title_line2", widget: "string" }
+              - { label: "Descrizione (Markdown)", name: "description", widget: "markdown", hint: "Puoi usare **grassetto** e link." }
+              - label: "CTA primaria"
+                name: "cta_primary"
+                widget: "object"
+                fields:
+                  - { label: "Testo", name: "label", widget: "string" }
+                  - { label: "URL",   name: "url",   widget: "string" }
+                  - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-box-seam" }
+              - label: "CTA secondaria"
+                name: "cta_secondary"
+                widget: "object"
+                fields:
+                  - { label: "Testo", name: "label", widget: "string" }
+                  - { label: "URL",   name: "url",   widget: "string" }
+                  - { label: "Icona Bootstrap", name: "icon", widget: "string", default: "bi-info-circle" }
+              - label: "Card DOI animate (verticali)"
+                name: "cards"
+                widget: "list"
+                label_singular: "Card DOI"
+                summary: "{{fields.id}} — {{fields.status}}"
+                hint: "Le card scorrono automaticamente dall'alto verso il basso. Aggiungine quante vuoi."
+                fields:
+                  - { label: "DOI", name: "id", widget: "string", hint: "es. 10.1234" }
+                  - { label: "Slug", name: "slug", widget: "string", hint: "es. /book.2024.001" }
+                  - { label: "Stato", name: "status", widget: "string", default: "Registrato" }
+                  - { label: "Icona stato", name: "status_icon", widget: "string", default: "bi-check-lg" }
+          # ---------------- WHAT IS A DOI ----------------
+          - label: "What is a DOI"
+            name: "what_doi"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", default: "What is a DOI?" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Paragraphs" 
+                name: "paragraphs"
+                widget: "list"
+                label_singular: "Paragrafo"
+                summary: "{{fields.text}}"
+                field: { label: "Testo", name: "text", widget: "text" }
+              - label: "Link 'Learn more'"
+                name: "learn_more"
+                widget: "object"
+                fields: 
+                  - { label: "Text", name: "label", widget: "string", default: "Learn more about DOI"}
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Icon Bootstrap", name: "icon", widget: "string", default: "bi-arrow-right-circle" }
+              - label: "Card esempio DOI (navy)"
+                name: "example"
+                widget: "object"
+                fields:
+                  - { label: "Label superiore", name: "label", widget: "string", default: "EXAMPLE DOI" }
+                  - { label: "Prefisso", name: "prefix", widget: "string", hint: "Parte arancione grande, es. 10.1392" }
+                  - { label: "Suffisso", name: "suffix", widget: "string", hint: "Parte bianca, es. /BC4556.2023.001" }
+                  - label: "Legenda"
+                    name: "legend"
+                    widget: "list"
+                    label_singular: "Voce legenda"
+                    summary: "{{fields.label}}"
+                    fields:
+                      - label: "Colore punto"
+                        name: "dot"
+                        widget: "select"
+                        default: "yellow"
+                        options:
+                          - { label: "Arancio/giallo", value: "yellow" }
+                          - { label: "Blu", value: "blue" }
+                      - { label: "Etichetta", name: "label", widget: "string" }
+                  - { label: "Resolves to — URL", name: "resolves_url", widget: "string" }
+                  - { label: "Standard", name: "standard", widget: "string", default: "ISO 26324 · ANSI/NISO Z39.84" }
+          - label: "How it works (Come funziona)"
+            name: "how_it_works"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Titolo",  name: "title",   widget: "string" }
+              - label: "Step"
+                name: "steps"
+                widget: "list"
+                summary: "{{fields.number}} — {{fields.title}}"
+                fields:
+                  - { label: "Numero",     name: "number",      widget: "string", default: "01" }
+                  - { label: "Titolo",     name: "title",       widget: "string" }
+                  - { label: "Descrizione", name: "description", widget: "text" }
 
-  - name: reserved-area-doi-crawlable-url-service
-    label: "DOI Crawlable URL Service 🔐"
-    folder: "content/reserved/doi-crawlable-url-service"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
-
-  - name: reserved-area-citations-registration
-    label: "Citations Registration 🔐"
-    folder: "content/reserved/citations-registration"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
-
-  - name: reserved-area-query-upload
-    label: "Query Upload 🔐"
-    folder: "content/reserved/query-upload"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
-
-  - name: reserved-area-drs-basic-registration
-    label: "DRS Basic Registration 🔐"
-    folder: "content/reserved/drs-basic-registration"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+          - label: "Partners (marquee orizzontale)"
+            name: "partners"
+            widget: "object"
+            fields:
+              - { label: "Titolo sezione", name: "title", widget: "string" }
+              - label: "Loghi / Nomi"
+                name: "items"
+                widget: "list"
+                label_singular: "Partner"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Nome", name: "name", widget: "string" }
+                  - { label: "URL (opzionale)", name: "url", widget: "string", required: false }
   
-  - name: reserved-area-monitoring-registration
-    label: "Monitoring Registration 🔐"
-    folder: "content/reserved/monitoring-registration"
-    create: true
-    i18n: true
-    fields: [
-       { label: "Title", name: "title", widget: "string", i18n: true },
-       { label: "Description", name: "description", widget: "string", required: false, i18n: true },
-       { label: "Weight", name: "weight", widget: "number", i18n: duplicate },
-       { label: "Draft", name: "draft", widget: "boolean", default: false, i18n: true },
-       { label: "Date", name: "date", widget: "datetime", required: false, default: "{{now}}", i18n: true },
-       { label: "Content", name: "body", widget: "markdown", i18n: true },
-       { label: "Author", name: "author", widget: "string", required: true, i18n: true },
-    ]
+  - name: "pricing"
+    label: "Pricing"
+    files:
+      - name: "pricing_en"
+        label: "English — Pricing"
+        file: "data/pricing/en.yaml"
+        fields:
+          # Header
+          - label: "Header sezione"
+            name: "header"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow",     name: "eyebrow",  widget: "string" }
+              - { label: "Titolo",      name: "title",    widget: "string" }
+              - { label: "Sottotitolo", name: "subtitle", widget: "text" }
+
+          # Startup
+          - label: "Startup banner"
+            name: "startup"
+            widget: "object"
+            fields:
+              - { label: "Icona",   name: "icon",  widget: "string", default: "bi-rocket-takeoff" }
+              - { label: "Titolo",  name: "title", widget: "string" }
+              - { label: "Testo",   name: "text",  widget: "text" }
+
+          # Main table
+          - label: "Tabella principale"
+            name: "main_table"
+            widget: "object"
+            fields:
+              - label: "Intestazioni colonne"
+                name: "columns"
+                widget: "object"
+                fields:
+                  - { label: "Bracket",          name: "bracket",       widget: "string" }
+                  - { label: "Annual Fee",       name: "fee",           widget: "string" }
+                  - { label: "Included",         name: "included",      widget: "string" }
+                  - { label: "Excess",           name: "excess",        widget: "string" }
+                  - { label: "Excess — sottotitolo", name: "excess_sub", widget: "string" }
+                  - { label: "Testo CTA",        name: "cta",           widget: "string" }
+                  - { label: "Badge popolare",   name: "popular_label", widget: "string" }
+              - label: "Righe"
+                name: "rows"
+                widget: "list"
+                summary: "Bracket {{fields.bracket}} — {{fields.fee}}"
+                fields:
+                  - { label: "Bracket",           name: "bracket",   widget: "string" }
+                  - { label: "Annual fee",        name: "fee",       widget: "string" }
+                  - { label: "Included",          name: "included",  widget: "string" }
+                  - { label: "Excess price",      name: "excess",    widget: "string" }
+                  - { label: "CTA URL",           name: "cta_url",   widget: "string" }
+                  - { label: "Evidenzia (popolare)", name: "popular", widget: "boolean", default: false }
+
+          # Add-on tables
+          - label: "Tabelle add-on (CrossRef / Similarity Check)"
+            name: "addon_tables"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Key (crossref / simcheck)", name: "key",      widget: "string",
+                  hint: "Usa crossref o simcheck per applicare la palette corretta." }
+              - { label: "Titolo",      name: "title",    widget: "string" }
+              - { label: "Sottotitolo", name: "subtitle", widget: "text" }
+              - { label: "Note di blocco", name: "note", widget: "text", required: false }
+              - label: "Brackets (colonne)"
+                name: "brackets"
+                widget: "list"
+                summary: "Bracket {{fields.value}}"
+                field: { label: "Valore", name: "value", widget: "string" }
+              - label: "Righe"
+                name: "rows"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Etichetta riga", name: "label", widget: "string" }
+
+          # Notes
+          - label: "Note finali"
+            name: "notes"
+            widget: "object"
+            fields:
+              - { label: "Titolo", name: "title", widget: "string", default: "Notes" }
+              - label: "Note"
+                name: "items"
+                widget: "list"
+                summary: "{{fields.note}}"
+                field: { label: "Nota (Markdown)", name: "note", widget: "text" }
+
+          # CTA
+          - label: "CTA finale"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "URL",   name: "url",   widget: "string" }
+              - { label: "Icona", name: "icon",  widget: "string", default: "bi-envelope-fill" }
+              - { label: "Testo", name: "label", widget: "string" }
+              - { label: "Nota (Markdown)", name: "note", widget: "markdown" }
+
+  # TRANSLATION UI
+  - name: "i18n"
+    label: "Traduzioni interfaccia"
+    files:
+      - name: "i18n_it"
+        label: "Italiano (i18n)"
+        file: "i18n/it.yaml"
+        fields:
+          - label: "Stringhe"
+            name: "strings"
+            widget: "list"
+            summary: "{{fields.id}} → {{fields.translation}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Traduzione", name: "translation", widget: "string" }
+      - name: "i18n_en"
+        label: "English (i18n)"
+        file: "i18n/en.yaml"
+        fields:
+          - label: "Strings"
+            name: "strings"
+            widget: "list"
+            summary: "{{fields.id}} → {{fields.translation}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Translation", name: "translation", widget: "string" }

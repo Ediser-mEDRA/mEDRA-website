@@ -7,6 +7,24 @@
     {{- end }}
   {{- end }}
 {{- end }}
+{{- with resources.Get "css/main.css" }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with resources.Get "css/navbar.css" }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
+  {{- end }}
+{{- end }}
 {{- with resources.Get "css/medra.css" }}
   {{- if eq hugo.Environment "development" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
@@ -25,6 +43,10 @@
     {{- end }}
   {{- end }}
 {{- end }}
+
+{{ $pricing := resources.Get "css/pricing.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $pricing.RelPermalink }}" integrity="{{ $pricing.Data.Integrity }}">
+
 {{- with resources.Get "css/footer.css" }}
   {{- if eq hugo.Environment "development" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">

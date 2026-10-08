@@ -1,0 +1,53 @@
+{{- /*
+  Renders a <div class="panel-list"> with child pages as <a class="panel-list-item">.
+  Params:
+    - .item    (Page)    : the section whose children will be listed
+    - .current (string)  : current page RelPermalink for active-state detection
+    - .level   (int)     : optional, kept for compatibility
+  Front matter supported per child:
+    - title      (string)  : fallback label
+    - menu_title (string)  : preferred label
+    - icon       (string)  : Bootstrap icon class WITHOUT the "bi " prefix (e.g. "bi-person-gear")
+    - external_url (string): if set, uses this URL instead of RelPermalink and opens in new tab
+    - weight     (int)     : ordering
+*/ -}}
+
+{{- $item    := .item -}}
+{{- $current := .current | default "" -}}
+{{- $level   := .level | default 2 -}}
+
+{{- $children := $item.Pages -}}
+
+{{- if gt (len $children) 0 -}}
+<div class="panel-list">
+  {{- range $children.ByWeight -}}
+
+    {{- $child       := . -}}
+    {{- $url         := $child.RelPermalink -}}
+    {{- $externalUrl := $child.Params.external_url | default "" -}}
+    {{- $href        := cond (ne $externalUrl "") $externalUrl $url -}}
+    {{- $isExternal  := ne $externalUrl "" -}}
+
+    {{- $title := $child.Params.menu_title | default $child.Title -}}
+    {{- $icon  := $child.Params.icon | default "bi-chevron-right" -}}
+
+    {{- $isActive := and
+        (not $isExternal)
+        (or
+          (eq $current $url)
+          (and (ne $url "/") (ne $url "") (hasPrefix $current $url))
+        )
+    -}}
+
+    <a href="{{ $href }}"
+       class="panel-list-item{{ if $isActive }} active{{ end }}"
+       {{ if $isActive }}aria-current="page"{{ end }}
+       {{ if $isExternal }}target="_blank" rel="noopener noreferrer"{{ end }}>
+      <i class="bi {{ $icon }}" aria-hidden="true"></i>
+      <span>{{ $title }}</span>
+      <i class="bi bi-chevron-right ms-auto" aria-hidden="true"></i>
+    </a>
+
+  {{- end -}}
+</div>
+{{- end -}}

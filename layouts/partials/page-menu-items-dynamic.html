@@ -1,0 +1,96 @@
+{{- $item := .item -}}
+{{- $current := .current -}}
+{{- $level := .level -}}
+
+{{- $url := $item.RelPermalink -}}
+{{- $isActive := or
+    (eq $current $url)
+    (and (ne $url "/") (ne $url "") (hasPrefix $current $url))
+-}}
+
+{{- $children := $item.Pages -}}
+{{- $hasChildren := gt (len $children) 0 -}}
+
+{{- if eq $level 1 -}}
+
+  {{- if $hasChildren -}}
+
+    <li class="nav-item dropdown medra-submenu">
+      <a class="nav-link dropdown-toggle {{ if $isActive }}active{{ end }}"
+         href="{{ $url }}"
+         role="button"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+        {{ $item.Title }}
+      </a>
+
+      <ul class="dropdown-menu medra-dropdown">
+        {{ range $children.ByWeight }}
+          {{ partial "page-menu-items-dynamic.html"
+              (dict
+                "item" .
+                "current" $current
+                "level" 2
+              )
+          }}
+        {{ end }}
+      </ul>
+    </li>
+
+  {{- else -}}
+
+    <li class="nav-item">
+      <a class="nav-link {{ if $isActive }}active{{ end }}"
+         href="{{ $url }}"
+         {{ if $isActive }}aria-current="page"{{ end }}>
+        {{ $item.Title }}
+      </a>
+    </li>
+
+  {{- end -}}
+
+{{- else -}}
+
+  {{- if $hasChildren -}}
+
+    <li class="dropdown-submenu medra-submenu medra-submenu-far-right">
+
+      <a class="dropdown-item dropdown-toggle {{ if $isActive }}active{{ end }}"
+         href="{{ $url }}"
+         role="button"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+        {{ $item.Title }}
+      </a>
+
+      <ul class="dropdown-menu medra-dropdown">
+
+        {{ range $children.ByWeight }}
+
+          {{ partial "page-menu-items-dynamic.html"
+              (dict
+                "item" .
+                "current" $current
+                "level" (add $level 1)
+              )
+          }}
+
+        {{ end }}
+
+      </ul>
+
+    </li>
+    <li><hr class="dropdown-divider"></li>
+  {{- else -}}
+
+    <li>
+      <a class="dropdown-item {{ if $isActive }}active{{ end }}"
+         href="{{ $url }}"
+         {{ if $isActive }}aria-current="page"{{ end }}>
+        {{ $item.Title }}
+      </a>
+    </li>
+
+  {{- end -}}
+
+{{- end -}}

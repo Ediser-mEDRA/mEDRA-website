@@ -1,0 +1,371 @@
+{{ define "main" }}
+
+{{- $publicArea := site.GetPage "/public-area" -}}
+{{- $registeredUsersArea := site.GetPage "/reserved" -}}
+{{- $current := .RelPermalink -}}
+
+<section id="portal" class="portal-section">
+  <div class="container">
+    <div class="row g-4">
+      {{/* =========================================================
+        PUBLIC AREA
+      ========================================================= */}}
+      <aside class="col-12 col-lg-3" aria-label="{{ with $publicArea }}{{ .Title }}{{ else }}Public Area{{ end }}">
+        <!-- Public area content goes here -->
+        <div class="side-panel">
+          <nav class="side-group">
+            <h1 class="side-title">
+              <i class="bi bi-globe2" aria-hidden="true"></i>
+              <span>{{ with $publicArea }}{{ .Title }}{{ else }}Public Area{{ end }}</span>
+            </h1>
+            <ul class="side-menu">
+              {{ with $publicArea }}
+                {{ range .Pages.ByWeight }}
+                  {{ partial "page-laside-items-dynamic.html"
+                      (dict
+                        "item"    .
+                        "current" $current
+                      )
+                  }}
+                {{ end }}
+              {{ end }}
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <!-- CENTER -->
+      <div class="col-12 col-lg-6 d-flex flex-column gap-4">
+        <section class="portal-card card-glass p-4">
+          <div class="d-flex align-items-start gap-3">
+            <span class="card-icon"><i class="bi bi-search"></i></span>
+            <div class="flex-grow-1">
+              <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+                <h2 class="portal-card-title mb-0">Search mEDRA DOI Metadata</h2>
+                <a href="#" class="link-animated small">Extended search <i class="bi bi-chevron-right"></i></a>
+              </div>
+              <div class="title-rule"></div>
+            </div>
+          </div>
+          <form class="mt-4" id="metadata-search-form" novalidate>
+            <div class="mb-3">
+                <label for="searchContributor" class="portal-label"><i class="bi bi-person"></i><span>Contributor (author, editor, ...)</span></label>
+                <div class="input-group portal-field">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="searchContributor" placeholder="Search contributors...">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="searchTitle" class="portal-label"><i class="bi bi-file-text"></i><span>Title</span></label>
+                <div class="input-group portal-field">
+                    <span class="input-group-text">Aa</span>
+                    <input type="text" class="form-control" id="searchTitle" placeholder="Search by title...">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-medra btn-lg w-100">
+                <i class="bi bi-search me-2"></i><span>Search Metadata</span>
+            </button>
+          </form>
+        </section>
+
+        <section class="portal-card card-glass p-4">
+          <span class="badge-new">NEW</span>
+          <div class="d-flex align-items-start gap-3">
+              <span class="card-icon"><i class="bi bi-newspaper"></i></span>
+              <div>
+                  <h2 class="portal-card-title mb-0">Latest Updates</h2>
+                  <div class="title-rule"></div>
+              </div>
+          </div>
+          <p class="portal-text mt-3 mb-3">The <strong>Web Editor User Guides</strong> explain how to enter metadata and create new DOIs, update existing DOIs, and add citations through the simplified online forms.</p>
+          <hr class="portal-divider">
+          <p class="portal-text mb-0">Le <strong>Guide utente degli editor online</strong> spiegano come compilare i metadati e creare nuovi DOI, aggiornare DOI esistenti e aggiungere citazioni con la scheda online.</p>
+        </section>
+      </div>
+      <!-- RIGHT SIDEBAR -->
+      <aside class="col-12 col-lg-3 d-flex flex-column gap-4">
+        <section class="portal-card card-glass p-4">
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <span class="card-icon"><i class="bi bi-link-45deg"></i></span>
+            <h2 class="portal-card-title mb-0">DOI Resolver</h2>
+          </div>
+          <form id="doi-resolver-form" novalidate>
+            <label for="doiInput" class="visually-hidden">DOI</label>
+            <input type="text" class="form-control portal-input mb-3" id="doiInput" placeholder="Enter DOI to resolve..." autocomplete="off" spellcheck="false">
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-orange flex-fill" id="doi-metadata-btn"><i class="bi bi-eye me-1"></i><span>Metadata</span></button>
+              <button type="submit" class="btn btn-medra flex-fill"><i class="bi bi-arrow-right-circle me-1"></i><span>Resolve</span></button>
+            </div>
+          </form>
+        </section>
+        <section class="portal-card card-glass p-4">
+          <div class="d-flex align-items-start gap-3 mb-3">
+            <span class="card-icon"><i class="bi bi-shield-check"></i></span>
+            <h2 class="portal-card-title mb-0">
+              <span>{{ with $registeredUsersArea }}{{ .Title }}{{ else }}Registered Users Area{{ end }}</span>
+            </h2>
+          </div>
+          <div class="panel-list">
+            {{ with $publicArea }}
+              {{ range .Pages.ByWeight }}
+                {{ partial "page-raside-items-dynamic.html"
+                    (dict
+                      "item"    .
+                      "current" $current
+                      "level"   2
+                    )
+                }}
+              {{ end }}
+            {{ end }}
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{{- $lang := .Site.Language.Lang -}}
+{{- $L := index .Site.Data.landing $lang -}}
+
+
+{{- $svc  := index .Site.Data.services $lang -}}
+{{- $news := index .Site.Data.news     $lang -}}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-12 col-lg-6">
+        <div class="hero-badge">
+          <i class="bi {{ $L.hero.badge_icon }}" aria-hidden="true"></i>
+          <span>{{ $L.hero.badge }}</span>
+        </div>
+
+        <h1 class="hero-title">
+          {{ $L.hero.title_line1 }}
+          <span class="accent">{{ $L.hero.title_line2 }}</span>
+        </h1>
+
+        <div class="hero-sub">{{ $L.hero.description | markdownify }}</div>
+
+        <div class="hero-cta">
+          <a href="{{ $L.hero.cta_primary.url }}" class="btn-hero-primary">
+            <i class="bi {{ $L.hero.cta_primary.icon }}"></i>
+            <span>{{ $L.hero.cta_primary.label }}</span>
+          </a>
+          <a href="{{ $L.hero.cta_secondary.url }}" class="btn-hero-secondary">
+            <i class="bi {{ $L.hero.cta_secondary.icon }}"></i>
+            <span>{{ $L.hero.cta_secondary.label }}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="hero-visual">
+          <div class="hero-circle" aria-hidden="true"></div>
+          <div class="doi-cards">
+            <div class="doi-cards__track">
+              {{- range $L.hero.cards -}}
+                <div class="doi-card">
+                  <p class="doi-card__id">{{ .id }}</p>
+                  <p class="doi-card__slug">{{ .slug }}</p>
+                  <span class="doi-card__status">
+                    <i class="bi {{ .status_icon }}"></i> {{ .status }}
+                  </span>
+                </div>
+              {{- end -}}
+              {{- /* Duplicato per loop continuo */ -}}
+              {{- range $L.hero.cards -}}
+                <div class="doi-card" aria-hidden="true">
+                  <p class="doi-card__id">{{ .id }}</p>
+                  <p class="doi-card__slug">{{ .slug }}</p>
+                  <span class="doi-card__status">
+                    <i class="bi {{ .status_icon }}"></i> {{ .status }}
+                  </span>
+                </div>
+              {{- end -}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS A DOI -->
+<section class="what-doi">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-6">
+        <span class="eyebrow">{{ $L.what_doi.eyebrow }}</span>
+        <h2 class="what-doi__title">{{ $L.what_doi.title }}</h2>
+        <div class="title-bar"></div>
+
+        {{ range $L.what_doi.paragraphs }}
+          <p class="what-doi__text">{{ . }}</p>
+        {{ end }}
+
+        <a href="{{ $L.what_doi.learn_more.url }}" class="what-doi__link">
+          <i class="bi {{ $L.what_doi.learn_more.icon }}"></i>
+          <span>{{ $L.what_doi.learn_more.label }}</span>
+        </a>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="doi-example">
+          <p class="doi-example__label">{{ $L.what_doi.example.label }}</p>
+          <div class="doi-example__line">
+            <span class="doi-prefix">{{ $L.what_doi.example.prefix }}</span>
+            <span class="doi-suffix">{{ $L.what_doi.example.suffix }}</span>
+          </div>
+
+          <div class="doi-legend">
+            {{ range $L.what_doi.example.legend }}
+              <span><span class="dot dot--{{ .dot }}"></span> {{ .label }}</span>
+            {{ end }}
+          </div>
+
+          <div class="doi-example__footer">
+            <div>
+              <p class="doi-example__footer-label">Resolves to</p>
+              <p class="doi-resolve">{{ $L.what_doi.example.resolves_url }}</p>
+            </div>
+            <div>
+              <p class="doi-example__footer-label">Standard</p>
+              <p class="doi-standard">{{ $L.what_doi.example.standard }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="homepage-section homepage-section--cream">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-eyebrow">{{ $svc.eyebrow }}</span>
+      <h2 class="section-title">{{ $svc.title }}</h2>
+    </div>
+    <div class="services-grid">
+      {{ range $svc.items }}
+        <div class="service-box">
+          <div class="service-icon"><i class="bi {{ .icon }}"></i></div>
+          <h3>{{ .title }}</h3>
+          <p>{{ .description }}</p>
+          <a href="{{ .link_url }}" class="service-link">{{ .link_text }} <i class="bi bi-arrow-right"></i></a>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="homepage-section homepage-section--cream">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-eyebrow">{{ $L.how_it_works.eyebrow }}</span>
+      <h2 class="section-title">{{ $L.how_it_works.title }}</h2>
+    </div>
+    <div class="steps-container">
+      {{ range $L.how_it_works.steps }}
+        <div class="step">
+          <div class="step-number">{{ .number }}</div>
+          <h3>{{ .title }}</h3>
+          <p>{{ .description }}</p>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news" class="homepage-section">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5 flex-wrap gap-3">
+      <div>
+        <span class="section-eyebrow eyebrow-start">{{ $news.eyebrow }}</span>
+        <h2 class="section-title mb-0">{{ $news.title }}</h2>
+      </div>
+      {{ with $news.view_all_url }}<a href="{{ . }}" class="link-animated">View all news <i class="bi bi-arrow-right ms-1"></i></a>{{ end }}
+    </div>
+    <div class="news-grid">
+      <article class="news-featured">
+        <div>
+          <span class="news-badge-latest">{{ $news.featured.badge }}</span>
+          <div class="news-featured-date">{{ $news.featured.date }}</div>
+          <h3>{{ $news.featured.title }}</h3>
+          <p>{{ $news.featured.excerpt }}</p>
+        </div>
+        <a href="{{ $news.featured.link_url }}" class="news-featured-link">{{ $news.featured.link_text }} <i class="bi bi-arrow-right"></i></a>
+      </article>
+      {{ range $news.items }}
+        <article class="news-card">
+          <span class="news-cat">{{ .category }}</span>
+          <h4>{{ .title }}</h4>
+          <p>{{ .excerpt }}</p>
+          <div class="news-card-footer">
+            <span>{{ .date }}</span>
+            <a href="{{ .link_url }}">Read more →</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+  <div class="container">
+    <p class="partners__title">{{ $L.partners.title }}</p>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee__track">
+      {{- range $L.partners.items -}}
+        <span class="partner">
+          <span class="partner__dot"></span>
+          {{ if .url }}
+            <a href="{{ .url }}" class="partner__name" style="color:inherit;text-decoration:none;">{{ .name }}</a>
+          {{ else }}
+            <span class="partner__name">{{ .name }}</span>
+          {{ end }}
+        </span>
+      {{- end -}}
+      {{- range $L.partners.items -}}
+        <span class="partner" aria-hidden="true">
+          <span class="partner__dot"></span>
+          <span class="partner__name">{{ .name }}</span>
+        </span>
+      {{- end -}}
+    </div>
+  </div>
+</section>
+<!--
+<section id="services" class="py-5">
+  <div class="container py-5">
+    <h2 class="text-center mb-5 fw-bold">{{ i18n "our_services" }}</h2>
+    <div class="row g-4">
+      {{ range where site.RegularPages "Section" "servizi" }}
+        {{ if eq .Lang site.Language.Lang }}
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card card-glass h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+              <i class="bi {{ .Params.icon }} fs-1 text-medra mb-3" aria-hidden="true"></i>
+              <h3 class="card-title h5">{{ .Title }}</h3>
+              <p class="card-text text-muted">{{ .Params.summary }}</p>
+              <a href="{{ .RelPermalink }}" class="link-animated">{{ i18n "learn_more" }} →</a>
+            </div>
+          </article>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+-->
+  {{ partial "pricing.html" . }}
+
+{{ end }}

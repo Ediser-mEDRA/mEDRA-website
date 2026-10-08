@@ -1,0 +1,89 @@
+header:
+  eyebrow: "DOI Registration Service"
+  title: "Simple, transparent pricing"
+  subtitle: "Choose the DOI bracket that fits your publishing volume. All prices are in Euro, VAT excluded."
+
+startup:
+  icon: "bi-rocket-takeoff"
+  title: "Startup cost — € 150"
+  text: "For the first year, customers have to consider a fee of € 150 as start up cost, comprehensive of technical assistance via e-mail or helpline (by appointment)."
+
+# ---------- Tabella principale DOI ----------
+main_table:
+  columns:
+    bracket: "DOI Bracket"
+    fee: "Annual Fee"
+    included: "DOIs Included"
+    excess: "Price per DOI"
+    excess_sub: "for exceeding DOIs"
+    cta: "Get started"
+    popular_label: "Most popular"
+
+  rows:
+    - { bracket: "0", fee: "€ 180",   included: "Up to 30 DOIs",    excess: "€ 4,50", cta_url: "#", popular: false }
+    - { bracket: "1", fee: "€ 350",   included: "Up to 75 DOIs",    excess: "€ 3,80", cta_url: "#", popular: false }
+    - { bracket: "2", fee: "€ 600",   included: "Up to 170 DOIs",   excess: "€ 2,70", cta_url: "#", popular: false }
+    - { bracket: "3", fee: "€ 900",   included: "Up to 350 DOIs",   excess: "€ 2,00", cta_url: "#", popular: true  }
+    - { bracket: "4", fee: "€ 1.350", included: "Up to 650 DOIs",   excess: "€ 1,60", cta_url: "#", popular: false }
+    - { bracket: "5", fee: "€ 2.000", included: "Up to 1.300 DOIs", excess: "€ 1,10", cta_url: "#", popular: false }
+    - { bracket: "6", fee: "€ 3.000", included: "Up to 2.550 DOIs", excess: "€ 0,90", cta_url: "#", popular: false }
+    - { bracket: "7", fee: "€ 4.500", included: "Up to 5.000 DOIs", excess: "€ 0,65", cta_url: "#", popular: false }
+    - { bracket: "8", fee: "€ 5.200", included: "Up to 6.500 DOIs", excess: "€ 0,55", cta_url: "#", popular: false }
+    - { bracket: "9", fee: "€ 6.000", included: "Up to 8.000 DOIs", excess: "€ 0,45", cta_url: "#", popular: false }
+
+# ---------- Add-on tables ----------
+addon_tables:
+  - key: "crossref"
+    title: "Deposit in CrossRef"
+    subtitle: "Thanks to a well developed partnership, mEDRA registered DOIs may be enabled also to CrossRef services"
+    brackets: ["0", "1", "2", "3", "4", "5"]
+    note: "Specific conditions are provided for customers joining the service from and including DOI bracket 6 onwards."
+    rows:
+      - label: "Annual fee"
+        values: ["€ 250", "€ 250", "€ 400", "€ 400", "€ 600", "€ 600"]
+        colspan: 1
+      - label: "Price per unit for deposited DOIs"
+        values: ["€ 0,80", "€ 0,80", "€ 0,80", "€ 0,80", "€ 0,75", "€ 0,75"]
+        colspan: 1
+
+  - key: "simcheck"
+    title: "Similarity Check"
+    subtitle: "mEDRA customers which joined CrossRef service may be enabled also to Similarity Check"
+    brackets: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    note: ""
+    rows:
+      - label: "Annual fee"
+        values: ["€ 50", "€ 50", "€ 80", "€ 80", "€ 120", "€ 120", "€ 180", "€ 180", "€ 180", "€ 180"]
+        colspan: 1
+      - label: "Price per unit for document check"
+        groups:
+          - colspan: 3
+            items:
+              - { text: "Up to 5.000 documents",  price: "each € 0,75" }
+              - { text: "Up to 25.000 documents", price: "each € 0,75" }
+              - { text: "Up to 50.000 documents", price: "each € 0,55" }
+          - colspan: 3
+            items: []
+          - colspan: 4
+            items:
+              - { text: "Up to 100.000 documents", price: "each € 0,45" }
+              - { text: "Up to 200.000 documents", price: "each € 0,35" }
+              - { text: "> 200.000 documents",     price: "each € 0,25" }
+
+# ---------- Note ----------
+notes:
+  title: "Notes"
+  items:
+    - "The access to mEDRA DOI Services requires an annual subscription expiring on 31/12 each year and automatic renewal."
+    - "The service is activated upon advanced payment of the annual fee (plus, for new contracts, the payment of the months of the current year)."
+    - "It is possible to change DOI Bracket from one year to the next upon written communication to [sales@medra.org](mailto:sales@medra.org)."
+    - "The cost for exceeding DOIs registered in the current year is invoiced at the beginning of the following year."
+    - "In the case of non-automatic annual renewal, there is a charge of € 100 per year for administrative procedures."
+    - "Discounts apply to backlist content, depending on the number of requested DOIs."
+
+# ---------- CTA finale ----------
+cta:
+  url: "mailto:sales@medra.org"
+  icon: "bi-envelope-fill"
+  label: "Contact sales for a quotation"
+  note: "Need a custom offer for universities or research centers? [Contact us](mailto:sales@medra.org)."
