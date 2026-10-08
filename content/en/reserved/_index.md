@@ -1,9 +1,12 @@
 ---
+draft: true
+updater: Anonymous
+author: Anonymous
 type: section
-title: Reserved
+title: Registered Users Area
+icon: bi bi-shield-check
 menu_title: Reserved
 weight: 30
-draft: true
 ---
 The Registered Users Area is the dedicated environment for users and organizations that use mEDRA services to register and manage DOI (Digital Object Identifier).
 
