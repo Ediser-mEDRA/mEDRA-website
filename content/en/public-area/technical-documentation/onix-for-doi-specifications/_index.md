@@ -1,8 +1,11 @@
 ---
 type: page
 title: ONIX for DOI Specifications
+icon: bi bi-list-columns-reverse
 weight: 10
 draft: true
+author: Anonymous
+updater: Anonymous
 ---
 
 In order to assign DOIs to the different kinds of objects supported by the **[ONIX DOI Metadata Schema](https://www-medra-dev.medra.org/en/schema.htm "ONIX DOI Metadata Schema")**, you have to compile the related metadata. DOI can be assigned to an object at work level or manifestation level:
