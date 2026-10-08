@@ -4,32 +4,110 @@
 {{ $canvas := resources.Get "js/canvas.js" }}
 {{ if eq (hugo.Environment) "development" -}}
     {{ with $jquery }}
-        <script src="{{ .RelPermalink }}" defer></script>
+        <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
     {{ with $js }}
-        <script src="{{ .RelPermalink }}" defer></script>
+        <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
     {{ with $bootstrap }}
-        <script src="{{ .RelPermalink }}" defer></script>
+        <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
     {{ with $canvas }}
-        <script src="{{ .RelPermalink }}" defer></script>
+        <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
 {{ else -}}
     {{ with $js }}
         {{ $js := . | minify | fingerprint "sha512" -}}
-        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
     {{ with $jquery }}
         {{ $jquery := . | minify | fingerprint "sha512" -}}
-        <script src="{{ $jquery.RelPermalink }}" integrity="{{ $jquery.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <script src="{{ $jquery.RelPermalink }}" integrity="{{ $jquery.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
     {{ with $bootstrap }}
         {{ $bootstrap := . | minify | fingerprint "sha512" -}}
-        <script src="{{ $bootstrap.RelPermalink }}" integrity="{{ $bootstrap.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <script src="{{ $bootstrap.RelPermalink }}" integrity="{{ $bootstrap.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
     {{ with $canvas }}
         {{ $canvas := . | minify | fingerprint "sha512" -}}
-        <script src="{{ $canvas.RelPermalink }}" integrity="{{ $canvas.Data.Integrity }}" crossorigin="anonymous" defer></script>
+        <script src="{{ $canvas.RelPermalink }}" integrity="{{ $canvas.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
 {{ end }}
+
+<script type="text/javascript" language="javascript">
+    function updateHeaderHeight() {
+        const header = document.getElementById('fixedHeader');
+        if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    }
+
+    $(document).ready(function() {
+        $('#year').text(new Date().getFullYear());
+        updateHeaderHeight();
+        $(window).on('resize orientationchange', () => setTimeout(updateHeaderHeight, 100));
+
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        $('html').attr('data-bs-theme', currentTheme);
+        updateToggleIcon(currentTheme);
+
+        $('#theme-toggle').on('click', function() {
+            const newTheme = $('html').attr('data-bs-theme') === 'light' ? 'dark' : 'light';
+            console.log('Theme changed to:', newTheme);
+            $('html').attr('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleIcon(newTheme);
+        });
+        function updateToggleIcon(theme) {
+            const isDark = theme === 'dark';
+            $('#theme-icon').toggleClass('bi-moon', !isDark).toggleClass('bi-sun', isDark);
+        }
+
+        let ticking = false;
+        $(window).on('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    const s = $(window).scrollTop();
+                    $('#topbar').toggleClass('hidden', s > 60);
+                    $('#fixedHeader').toggleClass('scrolled', s > 60);
+                    updateHeaderHeight();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        $('.btn').on('click', function(e) {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const $btn = $(this), off = $btn.offset();
+            const size = Math.max($btn.outerWidth(), $btn.outerHeight());
+            const $r = $('<span class="ripple"></span>').css({ width: size, height: size, left: e.pageX - off.left - size/2, top: e.pageY - off.top - size/2 });
+            $btn.append($r);
+            setTimeout(() => $r.remove(), 600);
+        });
+
+        function normalizeDoi(v) { return (v||'').trim().replace(/^https?:\/\/doi\.org\//i,'').replace(/^doi:\s*/i,''); }
+        $('#doi-resolver-form').on('submit', function(e) {
+            e.preventDefault();
+            const d = normalizeDoi($('#doiInput').val());
+            if (d) window.open('https://doi.org/' + encodeURIComponent(d), '_blank', 'noopener');
+        });
+        $('#doi-metadata-btn').on('click', function() {
+            const d = normalizeDoi($('#doiInput').val());
+            if (d) window.open('https://api.medra.org/metadata/' + encodeURIComponent(d), '_blank', 'noopener');
+        });
+        $('#metadata-search-form').on('submit', e => e.preventDefault());
+    });
+
+    function changeLanguage(lang) {
+        localStorage.setItem('lang', lang);
+        $('#current-lang-text').text(lang === 'en' ? 'English' : 'Italiano');
+        $('.medra-dropdown .dropdown-item[lang]').each(function() {
+            $(this).toggleClass('is-active', $(this).attr('lang') === lang);
+        });
+        document.documentElement.lang = lang;
+    }
+
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) {
+        changeLanguage(savedLang);
+    }
+</script>

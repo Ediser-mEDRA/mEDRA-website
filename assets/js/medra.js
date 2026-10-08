@@ -1,4 +1,5 @@
 /* ── TICKER LEFT→RIGHT ── */
+/*
 const PARTNERS=[
   'AIE – Assoc. Italiana Editori','Springer Nature','De Gruyter','Il Mulino',
   'Hoepli','Mondadori Libri','EDRA S.p.A.','FrancoAngeli','Feltrinelli',
@@ -13,3 +14,4 @@ const mkItems=()=>PARTNERS.map(p=>{
 });
 mkItems().forEach(el=>tt.appendChild(el));
 mkItems().forEach(el=>tt.appendChild(el));
+*/
