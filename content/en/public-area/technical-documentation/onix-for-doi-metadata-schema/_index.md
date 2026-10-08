@@ -1,9 +1,12 @@
 ---
+draft: false
+updater: Anonymous
+author: Anonymous
 type: page
 title: ONIX for DOI Metadata Schema
+icon: bi bi-diagram-3
 menu_title: ONIX for DOI Metadata Schema
 weight: 10
-draft: false
 ---
 **ONIX for DOI metadata schema** defines the XML format of the message requested by mEDRA system to register DOIs, showing the list of metadata concerning the object to be identified.
 
