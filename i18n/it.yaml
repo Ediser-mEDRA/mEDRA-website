@@ -1,84 +1,73 @@
-- id: home
-  translation: "Home"
-- id: services
-  translation: "Servizi"
-- id: contact
-  translation: "Contatti"
-- id: select_language
-  translation: "Seleziona lingua"
-- id: toggle_dark_mode
-  translation: "Attiva/disattiva modalità scura"
-- id: skip_to_content
-  translation: "Salta al contenuto principale"
-- id: topbar_email_aria
-  translation: "Scrivici a"
-- id: social_links_aria
-  translation: "Link ai social media"
-- id: main_navigation
-  translation: "Navigazione principale"
-- id: toggle_navigation
-  translation: "Apri/chiudi menu di navigazione"
-- id: learn_more
-  translation: "Scopri di più"
-- id: our_services
-  translation: "I Nostri Servizi"
-- id: hero_cta_primary
-  translation: "Scopri i servizi"
-- id: hero_cta_secondary
-  translation: "Contattaci"
-- id: contact_section_desc
-  translation: "Vuoi saperne di più sui nostri servizi? Scrivici."
-- id: send_email_aria
-  translation: "Inviaci un'email"
-- id: footer_description
-  translation: "Un marchio di EDISER, la società di servizi dell'Associazione Italiana Editori. Agenzia Ufficiale di Registrazione DOI e membro IDF."
-- id: footer_doi_services
-  translation: "Servizi DOI"
-- id: footer_about
-  translation: "Chi Siamo"
-- id: footer_resources
-  translation: "Risorse"
-- id: footer_contact
-  translation: "Contatti"
-- id: footer_link_register
-  translation: "Registra un DOI"
-- id: footer_link_search
-  translation: "Cerca Metadati"
-- id: footer_link_editor
-  translation: "Web Editor"
-- id: footer_link_citation
-  translation: "Citation Formatter"
-- id: footer_link_api
-  translation: "Accesso API"
-- id: footer_link_who
-  translation: "Chi Siamo"
-- id: footer_link_org
-  translation: "Organizzazione"
-- id: footer_link_gov
-  translation: "Governance"
-- id: footer_link_reports
-  translation: "Report Annuali"
-- id: footer_link_partners
-  translation: "Partner"
-- id: footer_link_docs
-  translation: "Documentazione"
-- id: footer_link_standards
-  translation: "Standard dei Metadati"
-- id: footer_link_faq
-  translation: "FAQ"
-- id: footer_link_guides
-  translation: "Guide Utente"
-- id: footer_link_downloads
-  translation: "Download"
-- id: footer_link_home
-  translation: "Home"
-- id: footer_link_public
-  translation: "Area Pubblica"
-- id: footer_link_registered
-  translation: "Area Utenti Registrati"
-- id: footer_link_privacy
-  translation: "Privacy"
-- id: rights
-  translation: "Tutti i diritti riservati."
-- id: footer_links_aria
-  translation: "Link del footer"
+strings:
+  - id: home
+    translation: "Home"
+  - id: services
+    translation: "Servizi"
+  - id: select_language
+    translation: "Seleziona lingua"
+  - id: skip_to_content
+    translation: "Salta al contenuto principale"
+  - id: social_links_aria
+    translation: "Link ai social media"
+  - id: toggle_navigation
+    translation: "Apri/chiudi menu di navigazione"
+  - id: our_services
+    translation: "I Nostri Servizi"
+  - id: hero_cta_secondary
+    translation: "Contattaci"
+  - id: contact_section_desc
+    translation: "Vuoi saperne di più sui nostri servizi? Scrivici."
+  - id: send_email_aria
+    translation: "Inviaci un'email"
+  - id: footer_description
+    translation: "Un marchio di EDISER, la società di servizi dell'Associazione Italiana Editori. Agenzia Ufficiale di Registrazione DOI e membro IDF."
+  - id: footer_doi_services
+    translation: "Servizi DOI"
+  - id: footer_about
+    translation: "Chi Siamo"
+  - id: footer_resources
+    translation: "Risorse"
+  - id: footer_contact
+    translation: "Contatti"
+  - id: footer_link_register
+    translation: "Registra un DOI"
+  - id: footer_link_search
+    translation: "Cerca Metadati"
+  - id: footer_link_editor
+    translation: "Web Editor"
+  - id: footer_link_citation
+    translation: "Citation Formatter"
+  - id: footer_link_api
+    translation: "Accesso API"
+  - id: footer_link_who
+    translation: "Chi Siamo"
+  - id: footer_link_org
+    translation: "Organizzazione"
+  - id: footer_link_gov
+    translation: "Governance"
+  - id: footer_link_reports
+    translation: "Report Annuali"
+  - id: footer_link_partners
+    translation: "Partner"
+  - id: footer_link_docs
+    translation: "Documentazione"
+  - id: footer_link_standards
+    translation: "Standard dei Metadati"
+  - id: footer_link_faq
+    translation: "FAQ"
+  - id: footer_link_guides
+    translation: "Guide Utente"
+  - id: footer_link_downloads
+    translation: "Download"
+  - id: footer_link_home
+    translation: "Home"
+  - id: footer_link_public
+    translation: "Area Pubblica"
+  - id: footer_link_registered
+    translation: "Area Utenti Registrati"
+  - id: footer_link_privacy
+    translation: "Privacy"
+  - id: rights
+    translation: "Tutti i diritti riservati."
+  - id: footer_links_aria
+    translation: "Link del footer"

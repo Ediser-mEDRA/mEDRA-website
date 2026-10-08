@@ -86,9 +86,7 @@
     transform: none;
 }
 
-/* ===================================================
-    SOLID TRIANGLE CARET (identico al lang dropdown)
-=================================================== */
+/* SOLID TRIANGLE CARET (identico al lang dropdown) */
 .nav-link.dropdown-toggle::before,
 .medra-submenu > .dropdown-item::after {
     content: '';
@@ -115,10 +113,8 @@
     transform: rotate(180deg);
 }
 
-/* ===================================================
-    UNIVERSAL DROPDOWN STYLE (.medra-dropdown)
-    Palette: VERDE SALVIA RAFFINATA
-=================================================== */
+/* UNIVERSAL DROPDOWN STYLE (.medra-dropdown)
+    Palette: VERDE SALVIA RAFFINATA */
 .medra-dropdown {
     border: 1px solid var(--pale-green-divider);
     border-radius: 14px;
@@ -202,9 +198,7 @@
     opacity: 1; 
 }
 
-/* ===================================================
-    SUBMENU — apre a DESTRA, dopo il caret
-    =================================================== */
+/* SUBMENU — apre a DESTRA, dopo il caret */
 .medra-submenu {
     position: relative;
 }

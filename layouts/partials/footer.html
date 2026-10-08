@@ -30,18 +30,18 @@
       </div>
 
       {{ range $footer.columns }}
-      <nav class="col-6 col-lg-2 footer-col" aria-label="{{ i18n .title_key }}">
-        <h3 class="footer-col-title">{{ i18n .title_key }}</h3>
-        <ul class="footer-menu">
-          {{ range .links }}
-          <li><a href="{{ .url }}" class="footer-link">{{ i18n .text_key }}</a></li>
-          {{ end }}
-        </ul>
-      </nav>
+        <nav class="col-6 col-lg-2 footer-col" aria-label="{{ i18n .title_key }}">
+          <h3 class="footer-col-title">{{ i18n (printf "strings.%s" .title_key) }}</h3>
+          <ul class="footer-menu">
+            {{ range .links }}
+            <li><a href="{{ .url }}" class="footer-link">{{ i18n (printf "strings.%s" .text_key) }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
       {{ end }}
 
-      <nav class="col-6 col-lg-2 footer-col" aria-label="{{ i18n "footer_contact" }}">
-        <h3 class="footer-col-title">{{ i18n "footer_contact" }}</h3>
+      <nav class="col-6 col-lg-2 footer-col" aria-label="{{ i18n (printf "strings.%s" "footer_contact") }}">
+        <h3 class="footer-col-title">{{ i18n (printf "strings.%s" "footer_contact") }}</h3>
         <a href="tel:{{ $footer.contact.phone }}" class="footer-contact-item">
           <i class="bi bi-telephone-fill" aria-hidden="true"></i>
           <span>{{ $footer.contact.phone }}</span>
@@ -59,9 +59,9 @@
       <p class="footer-copyright">
         © <span id="year"></span> <strong>{{ $footer.company.name }}</strong> — mEDRA is a registered trademark. {{ i18n "rights" }}
       </p>
-      <nav class="footer-bottom-links" aria-label="{{ i18n "footer_links_aria" }}">
+      <nav class="footer-bottom-links" aria-label="{{ i18n (printf "strings.%s" "footer_links_aria") }}">
         {{ range $footer.bottom_links }}
-        <a href="{{ .url }}">{{ i18n .text_key }}</a>
+        <a href="{{ .url }}">{{ i18n (printf "strings.%s" .text_key) }}</a>
         {{ end }}
       </nav>
     </div>

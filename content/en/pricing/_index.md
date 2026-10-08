@@ -1,8 +1,7 @@
 ---
-type: section
-title: Home
-icon: bi bi-house
-menu_title: Home
+type: page
+title: Pricing
+icon: bi bi-currency-exchange
 weight: 10
 draft: false
 author: Anonymous

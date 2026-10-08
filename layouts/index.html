@@ -105,7 +105,7 @@
             </h2>
           </div>
           <div class="panel-list">
-            {{ with $publicArea }}
+            {{ with $registeredUsersArea }}
               {{ range .Pages.ByWeight }}
                 {{ partial "page-raside-items-dynamic.html"
                     (dict
@@ -365,7 +365,8 @@
     </div>
   </div>
 </section>
+{{ partial "pricing.html" . }}
 -->
-  {{ partial "pricing.html" . }}
+  
 
 {{ end }}
