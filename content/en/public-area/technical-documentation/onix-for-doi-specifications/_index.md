@@ -3,7 +3,7 @@ type: page
 title: ONIX for DOI Specifications
 icon: bi bi-list-columns-reverse
 weight: 10
-draft: true
+draft: false
 author: Anonymous
 updater: Anonymous
 ---
