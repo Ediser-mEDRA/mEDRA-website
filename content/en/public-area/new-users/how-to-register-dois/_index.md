@@ -1,9 +1,12 @@
 ---
+draft: true
+updater: Anonymous
+author: Anonymous
 type: page
 title: How to register DOIs
+icon: bi bi-hash
 menu_title: How to register DOIs
 weight: 10
-draft: true
 ---
 ## The necessary informations to access DOI registration service and register DOIs properly
 
