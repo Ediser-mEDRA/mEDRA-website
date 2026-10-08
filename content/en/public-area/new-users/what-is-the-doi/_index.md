@@ -1,9 +1,12 @@
 ---
+draft: false
+updater: Anonymous
+author: Anonymous
 type: page
 title: What is the DOI
+icon: bi bi-question-circle
 menu_title: What is the DOI
 weight: 10
-draft: false
 ---
 ## Answers to the most frequently asked questions about DOI and related topics
 
