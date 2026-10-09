@@ -1745,7 +1745,7 @@ aside .portal-input::placeholder {
   left: 16%; 
   right: 16%; 
   height: 2px; 
-  background-image: linear-gradient(to right, var(--medra-orange) 50%, transparent 50%); 
+  background-image: linear-gradient(to right, var(--medra-orange) 100%, transparent 50%); 
   background-size: 12px 2px; 
   background-repeat: repeat-x; 
 }
