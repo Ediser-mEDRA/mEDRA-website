@@ -319,9 +319,7 @@ collections:
                   - { label: "Text Key (i18n)", name: "text_key", widget: "string" }
                   - { label: "URL", name: "url", widget: "string" }
   
-  # ================================================================
   # LANDING — Hero, What is a DOI, Partners
-  # ================================================================
   - name: "landing"
     label: "Landing — Hero, DOI, Partners"
     files:
@@ -437,6 +435,7 @@ collections:
                   - { label: "Name", name: "name", widget: "string" }
                   - { label: "URL (optional)", name: "url", widget: "string", required: false }
   
+  # PRICING
   - name: "pricing"
     label: "Pricing"
     files:
@@ -445,96 +444,170 @@ collections:
         file: "data/pricing/en.yaml"
         fields:
           # Header
-          - label: "Header section"
+          - label: "Header"
             name: "header"
             widget: "object"
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "text" }
+              - { label: "Title — row 1", name: "title_1", widget: "string" }
+              - { label: "Title — row 2 (accent)", name: "title_2", widget: "string" }
+              - { label: "Subtitle (Markdown)", name: "subtitle", widget: "markdown" }
 
           # Startup
-          - label: "Startup banner section"
+          - label: "Startup banner"
             name: "startup"
             widget: "object"
             fields:
-              - { label: "Icon", name: "icon",  widget: "string", default: "bi-rocket-takeoff" }
+              - { label: "Icon",  name: "icon",  widget: "string", default: "bi-rocket-takeoff-fill" }
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Text", name: "text",  widget: "text" }
+              - { label: "Text",  name: "text",  widget: "text" }
 
-          # Main table
-          - label: "Main table"
-            name: "main_table"
+          # Selector
+          - label: "Selector"
+            name: "selector"
             widget: "object"
             fields:
-              - label: "Column headers"
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "CTA button", name: "cta", widget: "string" }
+              - { label: "CTA URL", name: "cta_url", widget: "string" }
+              - { label: "Link 'View all' — text", name: "view_all_label", widget: "string" }
+              - { label: "Link 'View all' — URL",   name: "view_all_url", widget: "string" }
+              - { label: "Price period", name: "price_period", widget: "string", default: "/ year" }
+              - { label: "Price note (HTML)", name: "price_note", widget: "text" }
+              - label: "Feature card (HTML)"
+                name: "features"
+                widget: "list"
+                summary: "{{fields.feature}}"
+                field: { label: "Feature card (HTML)", name: "feature", widget: "string" }
+              - label: "Etichette"
+                name: "labels"
+                widget: "object"
+                fields:
+                  - { label: "Bracket", name: "bracket", widget: "string" }
+                  - { label: "Bracket N", name: "bracket_n", widget: "string" }
+                  - { label: "Included", name: "included", widget: "string" }
+                  - { label: "Included sub", name: "included_sub", widget: "string" }
+                  - { label: "Excess", name: "excess", widget: "string" }
+                  - { label: "Excess sub", name: "excess_sub", widget: "string" }
+                  - { label: "Best for", name: "best_for", widget: "string" }
+                  - { label: "Popular", name: "popular", widget: "string" }
+
+          # Brackets
+          - label: "Brackets (DOI brackets)"
+            name: "brackets"
+            widget: "list"
+            summary: "Bracket {{fields.num}} — € {{fields.fee}}"
+            fields:
+              - { label: "Number", name: "num", widget: "number", value_type: "int" }
+              - { label: "Annual Fee (€)", name: "fee", widget: "number", value_type: "int" }
+              - { label: "DOIs included", name: "included",  widget: "number", value_type: "int" }
+              - { label: "Excess price (€)", name: "excess", widget: "number", value_type: "float" }
+              - { label: "Popular", name: "popular", widget: "boolean", default: false }
+              - { label: "Best for", name: "use_case", widget: "string" }
+
+          # Full table
+          - label: "Full table"
+            name: "full_table"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow",  widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "text" }
+              - label: "Headers"
                 name: "columns"
                 widget: "object"
                 fields:
                   - { label: "Bracket", name: "bracket", widget: "string" }
-                  - { label: "Annual Fee", name: "fee", widget: "string" }
+                  - { label: "Fee", name: "fee", widget: "string" }
                   - { label: "Included", name: "included", widget: "string" }
                   - { label: "Excess", name: "excess", widget: "string" }
-                  - { label: "Excess — subtitle", name: "excess_sub", widget: "string" }
-                  - { label: "CTA Text", name: "cta", widget: "string" }
-              
-              - label: "Rows"
-                name: "rows"
+                  - { label: "CTA", name: "cta", widget: "string" }
+
+          # Crossref
+          - label: "Crossref"
+            name: "crossref"
+            widget: "object"
+            fields:
+              - { label: "Icon", name: "icon",  widget: "string", default: "bi-journal-bookmark-fill" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Paragraphs"
+                name: "paragraphs"
                 widget: "list"
-                summary: "Bracket {{fields.bracket}} — {{fields.fee}}"
+                summary: "{{fields.text}}"
+                field: { label: "Text (Markdown)", name: "text", widget: "markdown" }
+              - label: "Headers"
+                name: "columns"
+                widget: "object"
                 fields:
                   - { label: "Bracket", name: "bracket", widget: "string" }
-                  - { label: "Annual fee", name: "fee", widget: "string" }
+                  - { label: "Fee", name: "fee", widget: "string" }
                   - { label: "Included", name: "included", widget: "string" }
-                  - { label: "Excess price", name: "excess", widget: "string" }
-                  - { label: "CTA URL", name: "cta_url", widget: "string" }
-                  - { label: "Evidence (popular)", name: "popular", widget: "boolean", default: false }
-
-          # Add-on tables
-          - label: "Add-on tables (CrossRef / Similarity Check)"
-            name: "addon_tables"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Key (crossref / simcheck)", name: "key", widget: "string",
-                  hint: "Use crossref or simcheck to apply the correct palette." }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "text" }
-              - { label: "Block notes", name: "note", widget: "text", required: false }
-              - label: "Brackets (columns)"
-                name: "brackets"
-                widget: "list"
-                summary: "Bracket {{fields.value}}"
-                field: { label: "Value", name: "value", widget: "string" }
-              - label: "Rows"
-                name: "rows"
-                widget: "list"
-                summary: "{{fields.label}}"
+                  - { label: "Excess", name: "excess", widget: "string" }
+                  - { label: "Crossref Fee", name: "crossref_fee", widget: "string" }
+                  - { label: "Crossref Price", name: "crossref_price", widget: "string" }
+              - label: "Fees (map bracket → Fee)"
+                name: "fees"
+                widget: "map"
+                hint: "es. chiave '0' valore 250"
+                field: { label: "Fee", name: "fee", widget: "number", value_type: "int" }
+              - label: "Prices (map bracket → Price)"
+                name: "prices"
+                widget: "map"
+                hint: "e.g. key '0' value 0.80"
+                field: { label: "Price", name: "price", widget: "number", value_type: "float" }
+              - { label: "Footnote", name: "footnote", widget: "string" }
+              - label: "Special row"
+                name: "special"
+                widget: "object"
                 fields:
-                  - { label: "Row label", name: "label", widget: "string" }
+                  - { label: "Bracket", name: "bracket", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text" }
+
+          # Universities
+          - label: "Universities callout"
+            name: "universities"
+            widget: "object"
+            fields:
+              - { label: "Icon",  name: "icon",  widget: "string", default: "bi-mortarboard-fill" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Text",  name: "text", widget: "text" }
+              - { label: "CTA",    name: "cta", widget: "string" }
+              - { label: "CTA URL",name: "cta_url", widget: "string" }
 
           # Notes
-          - label: "Final notes"
+          - label: "Notes"
             name: "notes"
             widget: "object"
             fields:
-              - { label: "Title", name: "title", widget: "string", default: "Notes" }
+              - { label: "Title", name: "title", widget: "string" }
               - label: "Notes"
                 name: "items"
                 widget: "list"
                 summary: "{{fields.note}}"
-                field: { label: "Note (Markdown)", name: "note", widget: "text" }
+                field: { label: "Note (Markdown)", name: "note", widget: "markdown" }
 
-          # CTA
+          # Final CTA
           - label: "Final CTA"
-            name: "cta"
+            name: "final_cta"
             widget: "object"
             fields:
-              - { label: "URL",   name: "url",   widget: "string" }
-              - { label: "Icon", name: "icon",  widget: "string", default: "bi-envelope-fill" }
-              - { label: "Text", name: "label", widget: "string" }
-              - { label: "Note (Markdown)", name: "note", widget: "markdown" }
-
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "text" }
+              - label: "Primary button"
+                name: "primary"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Icon", name: "icon", widget: "string" }
+              - label: "Secondary button"
+                name: "secondary"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Icon", name: "icon", widget: "string" }
+  
   # TRANSLATION UI
   - name: "i18n"
     label: "Internationalisation"

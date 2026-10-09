@@ -44,7 +44,7 @@
   {{- end }}
 {{- end }}
 
-{{ $pricing := resources.Get "css/pricing.css" | minify | fingerprint }}
+{{ $pricing := resources.Get "css/price.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $pricing.RelPermalink }}" integrity="{{ $pricing.Data.Integrity }}">
 
 {{- with resources.Get "css/footer.css" }}

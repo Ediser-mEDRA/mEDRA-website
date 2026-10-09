@@ -39,10 +39,10 @@
       <div class="bracket-pills" id="bracketPills" role="tablist" aria-label="DOI Bracket selector">
         {{- range $i, $b := $P.brackets -}}
           <button class="bracket-pill{{ if eq $i 0 }} is-active{{ end }}{{ if $b.popular }} is-popular{{ end }}"
-                  data-bracket="{{ $b.n }}"
+                  data-bracket="{{ $b.num }}"
                   role="tab"
                   aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}">
-            {{ $b.n }}
+            {{ $b.num }}
           </button>
         {{- end -}}
       </div>
@@ -67,7 +67,7 @@
 
     {{/* Dati per JS */}}
     <script id="pricing-data" type="application/json">
-      {{ $P.brackets | jsonify }}
+      {{ $P.brackets | jsonify | safeJS }}
     </script>
 
   </div>

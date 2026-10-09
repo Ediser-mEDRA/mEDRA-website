@@ -1,7 +1,8 @@
 {{ $bootstrap := resources.Get "bootstrap/js/bootstrap.bundle.min.js" }}
 {{ $js := resources.Get "js/medra.js" }}
 {{ $jquery := resources.Get "js/jquery/jquery-3.7.1.js" }}
-{{ $canvas := resources.Get "js/canvas.js" }}
+{{ $pricing := resources.Get "js/pricing.js" }}
+
 {{ if eq (hugo.Environment) "development" -}}
     {{ with $jquery }}
         <script src="{{ .RelPermalink }}"></script>
@@ -12,7 +13,7 @@
     {{ with $bootstrap }}
         <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
-    {{ with $canvas }}
+    {{ with $pricing }}
         <script src="{{ .RelPermalink }}"></script>
     {{ end -}}
 {{ else -}}
@@ -28,9 +29,9 @@
         {{ $bootstrap := . | minify | fingerprint "sha512" -}}
         <script src="{{ $bootstrap.RelPermalink }}" integrity="{{ $bootstrap.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
-    {{ with $canvas }}
-        {{ $canvas := . | minify | fingerprint "sha512" -}}
-        <script src="{{ $canvas.RelPermalink }}" integrity="{{ $canvas.Data.Integrity }}" crossorigin="anonymous"></script>
+    {{ with $pricing }}
+        {{ $pricing := . | minify | fingerprint "sha512" -}}
+        <script src="{{ $pricing.RelPermalink }}" integrity="{{ $pricing.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end }}
 {{ end }}
 
