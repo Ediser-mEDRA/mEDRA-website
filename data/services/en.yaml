@@ -1,33 +1,41 @@
-eyebrow: "Our Services"
-title: "Everything you need to manage DOIs"
+eyebrow: Our Services
+title: Everything you need to manage DOIs
 items:
-  - icon: "bi-link-45deg"
-    title: "DOI Registration"
-    description: "Register DOIs for journals, articles, and datasets, and manage your full portfolio through the mEDRA service."
-    link_text: "Get started"
+  - icon: bi-link-45deg
+    title: DOI Registration
+    description: Register DOIs for journals, articles, and books, chapters, and
+      manage your full portfolio through the mEDRA service.
+    link_text: Get started
     link_url: "#"
-  - icon: "bi-pencil-square"
-    title: "Web Editor"
-    description: "Create, edit and manage DOI metadata easily and efficiently through our intuitive online interface."
-    link_text: "Get started"
+  - icon: bi-pencil-square
+    title: Web Editor
+    description: Create, edit and manage DOI metadata easily and efficiently through
+      our intuitive online interface.
+    link_text: Get started
     link_url: "#"
-  - icon: "bi-search"
-    title: "Metadata Search"
-    description: "Search the mEDRA metadata database to quickly discover registered content using multiple search options."
-    link_text: "Search now"
+  - icon: bi-search
+    title: Metadata Search
+    description: Search the mEDRA metadata database to quickly discover registered
+      content using multiple search options.
+    link_text: Search now
     link_url: "#"
-  - icon: "bi-arrow-left-right"
-    title: "Content Negotiation"
-    description: "Serve rich metadata (XML, JSON, RDF) via HTTP content negotiation to enable machine-readable access."
-    link_text: "Explore"
+  - icon: bi-arrow-left-right
+    title: Content Negotiation
+    description: Serve rich metadata (XML, JSON, RDF) via HTTP content negotiation
+      to enable machine-readable access.
+    link_text: Explore
     link_url: "#"
-  - icon: "bi-quote"
-    title: "Citation Formatter"
-    description: "Generate formatted citations in multiple bibliographic styles for all registered DOI content."
-    link_text: "Try it"
+  - icon: bi-quote
+    title: Citation Formatter
+    description: Generate formatted citations in multiple bibliographic styles for
+      all registered DOI content.
+    link_text: Try it
     link_url: "#"
-  - icon: "bi-code-slash"
-    title: "API & Integration"
-    description: "Integrate mEDRA into your production workflow or build automated services via our robust API."
-    link_text: "View API"
+  - icon: bi-code-slash
+    title: API & Integration
+    description: Integrate mEDRA into your production workflow or build automated
+      services via our robust API.
+    link_text: View API
     link_url: "#"
+author: njikonga-med
+updater: njikonga-med
