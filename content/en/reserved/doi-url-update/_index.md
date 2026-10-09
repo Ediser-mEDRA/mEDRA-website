@@ -6,6 +6,8 @@ type: subsection
 title: DOI URL Update
 icon: bi-link-45deg
 menu_title: DOI URL Update
+description: Use this service to update the URLs associated with your DOIs
+  registered with mEDRA, independently of any other DOI metadata updates.
 weight: 10
 ---
 ## DOI URL Update
