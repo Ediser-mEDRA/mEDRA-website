@@ -1,15 +1,15 @@
 {{- /*
   Renders a <div class="panel-list"> with child pages as <a class="panel-list-item">.
   Params:
-    - .item    (Page)    : the section whose children will be listed
-    - .current (string)  : current page RelPermalink for active-state detection
-    - .level   (int)     : optional, kept for compatibility
+    - .item (Page) : the section whose children will be listed
+    - .current (string) : current page RelPermalink for active-state detection
+    - .level (int) : optional, kept for compatibility
   Front matter supported per child:
-    - title      (string)  : fallback label
-    - menu_title (string)  : preferred label
-    - icon       (string)  : Bootstrap icon class WITHOUT the "bi " prefix (e.g. "bi-person-gear")
+    - title (string) : fallback label
+    - menu_title (string) : preferred label
+    - icon (string) : Bootstrap icon class WITHOUT the "bi " prefix (e.g. "bi-person-gear")
     - external_url (string): if set, uses this URL instead of RelPermalink and opens in new tab
-    - weight     (int)     : ordering
+    - weight (int) : ordering
 */ -}}
 
 {{- $item    := .item -}}

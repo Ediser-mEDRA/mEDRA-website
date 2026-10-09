@@ -2,8 +2,8 @@
   Sidebar di contesto — mostra SEMPRE il contenitore padre dell'elemento
   in oggetto:
 
-    • Pagina  → mostra la sezione di appartenenza + tutte le sue pagine
-    • Sezione → mostra la sezione GENITORE + tutte le sue sottosezioni e pagine
+    Pagina  >>> mostra la sezione di appartenenza e tutte le sue pagine
+    Sezione >>> mostra la sezione PARENT e tutte le sue sottosezioni e pagine
                  (se la sezione è top-level, mostra sé stessa)
 
   Ogni voce evidenzia automaticamente l'elemento corrente.
@@ -16,10 +16,10 @@
 {{- $parent := "" -}}
 
 {{- if $ctx.IsPage -}}
-  {{/* Pagina → la sua sezione */}}
+  {{/* Pagina >>> la sua sezione */}}
   {{- $parent = $ctx.CurrentSection -}}
 {{- else -}}
-  {{/* Sezione → la sezione genitore (o sé stessa se top-level) */}}
+  {{/* Sezione >>> la sezione genitore (o sé stessa se top-level) */}}
   {{- $up := $ctx.Parent -}}
   {{- if and $up (not $up.IsHome) -}}
     {{- $parent = $up -}}
