@@ -1,13 +1,13 @@
 ---
+draft: false
+updater: pmazzucchi
+author: pmazzucchi
 type: page
 title: Who we are
 icon: bi bi-people
 weight: 10
-image: /images/uploads/leone.png
-draft: false
+image: ""
 ---
-
-{{< figure src="/images/uploads/leone.png" alt="Leone" width="200" >}}
 mEDRA is a DOI Registration Agency (DOI RA) officially appointed by the [International DOI Foundation](http://www.doi.org) on 1st July 2003 and provides DOI registration services to publishers, academic institutions, research centres and intermediaries in Italy, in the EU market and internationally.
 
 At mEDRA we want to make things easy for everyone, therefore mEDRA system can be used by small and big organisations, for commercial and open access publications, with or without having technical skills. Moreover, mEDRA team is available to support customers individually and speaks Italian, English, French and German.
