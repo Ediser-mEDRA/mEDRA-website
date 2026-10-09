@@ -12,10 +12,6 @@ weight: 10
 ---
 ## DOI URL Update
 
-Use this service to update the URLs associated with your DOIs registered with **mEDRA**, independently of any other DOI metadata updates.
-
-## Available Services
-
 ### [Upload New URLs](/servlet/user/view_uploadForUpdateURL)
 
 Upload a file containing a list of DOIs and their corresponding new URLs to update existing DOI registrations.
