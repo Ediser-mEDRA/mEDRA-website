@@ -1735,7 +1735,29 @@ aside .portal-input::placeholder {
 @media (max-width: 767.98px) { 
   .steps-container { 
     grid-template-columns: 1fr; 
-  } 
+  }
+  
+  .footer-col {
+    margin-top: 1.2rem;
+  }
+  .footer-col-title{
+    margin-top: .01rem;
+    margin-bottom: .001rem;
+  }
+
+  #theme-toggle{
+    width: 44px;
+  }
+
+   #langDropdown {
+    width: 25% !important;
+    padding-left: 5px
+  }
+
+  .imgDoi {
+    object-fit: contain;
+    content: url("/images/doi-removebg-preview-removebg-preview.png");
+  }
 }
 
 .steps-container::before { 
