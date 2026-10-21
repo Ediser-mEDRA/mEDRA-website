@@ -167,6 +167,23 @@
 
       CMS.registerEventListener({ name: "postSave", handler: reloadAfterBuild });
       CMS.registerEventListener({ name: "postPublish", handler: reloadAfterBuild });
+
+      // Lets editors insert the Hugo contact-form shortcode from the markdown "+" menu.
+      const attr = (value) => String(value || "").replace(/"/g, "'");
+      CMS.registerEditorComponent({
+        id: "contact-form",
+        label: "Contact form",
+        fields: [
+          { name: "subject", label: "Email subject", widget: "string", required: false },
+          { name: "topics", label: "Topics (comma separated)", widget: "string", required: false,
+            hint: "Leave empty for the default list." }
+        ],
+        pattern: /^\{\{<\s*contact-form(?:\s+subject="([^"]*)")?(?:\s+topics="([^"]*)")?\s*>\}\}$/,
+        fromBlock: (match) => ({ subject: match[1] || "", topics: match[2] || "" }),
+        toBlock: ({ subject, topics }) =>
+          `{{< contact-form${subject ? ` subject="${attr(subject)}"` : ""}${topics ? ` topics="${attr(topics)}"` : ""} >}}`,
+        toPreview: () => "<p><em>[Contact form]</em></p>"
+      });
     </script>
   </body>
 </html>

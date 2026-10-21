@@ -1,0 +1,75 @@
+{{- $action := .Get "action" | default site.Params.contactForm.action -}}
+{{- $subject := .Get "subject" | default (printf "Contact from %s" .Page.Title) -}}
+{{- $id := printf "contact-form-%d" .Ordinal -}}
+{{- $topics := split (.Get "topics" | default "General enquiry,Become a mEDRA user,Technical support,Commercial information") "," -}}
+{{- if not $action }}
+<div class="alert alert-warning">Contact form: set <code>params.contactForm.action</code> in config or the <code>action</code> shortcode parameter.</div>
+{{- else }}
+<form id="{{ $id }}" class="contact-form card-glass p-4 my-4" action="{{ $action }}" method="POST" data-contact-form>
+  <input type="hidden" name="_subject" value="{{ $subject }}">
+  {{- /* Honeypot: bots fill it, humans never see it */}}
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="d-none" aria-hidden="true">
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="{{ $id }}-name" class="form-label">{{ i18n "strings.form_name" | default "Name" }} *</label>
+      <input id="{{ $id }}-name" name="name" type="text" class="form-control" required maxlength="100" autocomplete="name">
+    </div>
+    <div class="col-md-6">
+      <label for="{{ $id }}-email" class="form-label">{{ i18n "strings.form_email" | default "Email" }} *</label>
+      <input id="{{ $id }}-email" name="email" type="email" class="form-control" required maxlength="150" autocomplete="email">
+    </div>
+    <div class="col-md-6">
+      <label for="{{ $id }}-org" class="form-label">{{ i18n "strings.form_organization" | default "Organization" }}</label>
+      <input id="{{ $id }}-org" name="organization" type="text" class="form-control" maxlength="150" autocomplete="organization">
+    </div>
+    <div class="col-md-6">
+      <label for="{{ $id }}-topic" class="form-label">{{ i18n "strings.form_topic" | default "Topic" }}</label>
+      <select id="{{ $id }}-topic" name="topic" class="form-select">
+        {{- range $topics }}<option>{{ trim . " " }}</option>{{ end }}
+      </select>
+    </div>
+    <div class="col-12">
+      <label for="{{ $id }}-message" class="form-label">{{ i18n "strings.form_message" | default "Message" }} *</label>
+      <textarea id="{{ $id }}-message" name="message" rows="6" class="form-control" required maxlength="5000"></textarea>
+    </div>
+    <div class="col-12 form-check ms-2">
+      <input id="{{ $id }}-privacy" name="privacy" type="checkbox" class="form-check-input" value="accepted" required>
+      <label for="{{ $id }}-privacy" class="form-check-label">{{ i18n "strings.form_privacy" | default "I agree to the processing of my personal data." }} *</label>
+    </div>
+    <div class="col-12 d-flex align-items-center gap-3">
+      <button type="submit" class="btn btn-warning fw-semibold">
+        <i class="bi bi-send me-1"></i>{{ i18n "strings.form_send" | default "Send" }}
+      </button>
+      <span class="contact-form-status" role="status" aria-live="polite"
+            data-ok="{{ i18n "strings.form_ok" | default "Thank you! Your message has been sent." }}"
+            data-ko="{{ i18n "strings.form_ko" | default "Sorry, something went wrong. Please try again or email us." }}"></span>
+    </div>
+  </div>
+</form>
+{{- if not (.Page.Store.Get "contactFormScript") }}
+{{- .Page.Store.Set "contactFormScript" true }}
+<script>
+  document.addEventListener("submit", async function (e) {
+    const form = e.target.closest("form[data-contact-form]");
+    if (!form) return;
+    e.preventDefault();
+    const status = form.querySelector(".contact-form-status");
+    const button = form.querySelector("button[type=submit]");
+    button.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      status.textContent = status.dataset.ok;
+      status.className = "contact-form-status text-success";
+    } catch (err) {
+      status.textContent = status.dataset.ko;
+      status.className = "contact-form-status text-danger";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+{{- end }}
+{{- end }}

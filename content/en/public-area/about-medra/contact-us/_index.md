@@ -15,6 +15,8 @@ Here you find the details on how to contact us:
 - **General enquires**  
   For any other request contact us at [medra@medra.org](mailto:medra@medra.org).
 
+{{< contact-form subject="mEDRA website - Contact us" >}}
+
 ## Already a mEDRA customer?
 
 Here you find the details on how to contact us:
