@@ -50,6 +50,7 @@ shared_fields: &shared_fields
   - { label: "Weight", name: "weight", widget: "number", value_type: "int", default: 10 }
   - { label: "Image", name: "image", widget: "image", required: false }
   - { label: "Draft", name: "draft", widget: "boolean", default: false }
+  - { label: "Author", name: "author", widget: "hidden", required: false }
   - { label: "Body", name: "body", widget: "markdown", required: false }
 
 # ------------------------------------------------------------------

@@ -9,28 +9,163 @@
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="../scripts/decap-cms.js"></script>
+    <script src="../scripts/marked.min.js"></script>
     <script>
-      CMS.registerEventListener({
-        name: 'preSave',
-        handler: ({ entry, author }) => {
-          // Extract the GitHub username provided by GitHub OAuth
-          const githubUsername = author.login || author.username || 'Anonymous';
-          console.log('githubUsername: ' + githubUsername);
-          // Get the current form data
-          let data = entry.get('data');
+      // Hugo server origin; the admin is served by `hugo server`, so same origin by default.
+      const HUGO_ORIGIN = window.location.origin;
+      const LANGS = ["de", "en", "it"];
+      const reloadListeners = new Set();
 
-          // 1. If 'author' is empty, this is a new post. Set the creator.
-          if (!data.get('author')) {
-            data = data.set('author', githubUsername);
-          }
+      function toHugoPath(segment) {
+        return segment.trim().toLowerCase().replace(/\s+/g, "-");
+      }
 
-          // 2. Always update the 'updater' field with the current user
-          data = data.set('updater', githubUsername);
+      // Maps the entry's source file to the URL Hugo generates for it.
+      function hugoUrl(entry) {
+        const path = entry.get("path") || "";
+        const data = entry.get("data");
+        if (!path) return null;
 
-          // Return the modified data back to Decap CMS
-          return data;
+        const customUrl = data && data.get("url");
+        if (typeof customUrl === "string" && customUrl.startsWith("/") && !customUrl.startsWith("//")) {
+          return customUrl;
+        }
+
+        const content = path.match(/^content\/([a-z]{2})\/(.*)\.md$/);
+        if (content) {
+          const segments = content[2].split("/").filter(Boolean);
+          if (/^_?index$/.test(segments[segments.length - 1])) segments.pop();
+          const slug = data && data.get("slug");
+          if (slug && segments.length) segments[segments.length - 1] = slug;
+          const rest = segments.map(toHugoPath).join("/");
+          return `/${content[1]}/${rest ? rest + "/" : ""}`;
+        }
+
+        const langMatch = path.match(/(?:^|\/)([a-z]{2})\.ya?ml$/);
+        const lang = langMatch && LANGS.includes(langMatch[1]) ? langMatch[1] : "en";
+        const section = path.startsWith("data/pricing/") ? "pricing/" : "";
+        return `/${lang}/${section}`;
+      }
+
+      const HugoPreview = createClass({
+        getInitialState() {
+          return { nonce: Date.now() };
         },
+        reload() {
+          this.setState({ nonce: Date.now() });
+        },
+        componentDidMount() {
+          reloadListeners.add(this.reload);
+        },
+        componentDidUpdate() {
+          this.applyLive();
+        },
+        componentWillUnmount() {
+          reloadListeners.delete(this.reload);
+        },
+        // Pushes unsaved title/description/body into the Hugo-rendered iframe (same origin).
+        applyLive() {
+          const entry = this.props.entry;
+          const doc = this.frame && this.frame.contentDocument;
+          if (!doc || !window.marked || !/^content\//.test(entry.get("path") || "")) return;
+          const data = entry.get("data");
+          const set = (selector, html) => {
+            const el = doc.querySelector(selector);
+            if (el && el.innerHTML !== html) el.innerHTML = html;
+          };
+          const title = data.get("title");
+          if (typeof title === "string") set(".page-title", window.marked.parseInline(title));
+          const description = data.get("description");
+          if (typeof description === "string") {
+            let p = doc.querySelector(".page-description");
+            if (!description) {
+              if (p) p.remove();
+            } else {
+              const heading = doc.querySelector(".page-title");
+              if (!p && heading) {
+                p = doc.createElement("p");
+                p.className = "page-description";
+                heading.insertAdjacentElement("afterend", p);
+              }
+              if (p && p.textContent !== description) p.textContent = description;
+            }
+          }
+          const body = data.get("body");
+          // Shortcodes need Hugo to render, so those bodies wait for the next save.
+          if (typeof body === "string" && !/\{\{[<%]/.test(body)) set(".page-content", window.marked.parse(body));
+        },
+        render() {
+          const url = hugoUrl(this.props.entry);
+          if (!url) {
+            return h("p", { style: { padding: "1rem", fontFamily: "sans-serif" } },
+              "Save the entry to generate the Hugo preview.");
+          }
+          const src = HUGO_ORIGIN + url;
+          // Right padding keeps the actions clear of Decap's floating "Toggle preview" / "Sync scrolling" buttons.
+          const bar = {
+            display: "flex", gap: "0.5rem", alignItems: "center", minHeight: "48px",
+            padding: "0.4rem 140px 0.4rem 0.75rem", boxSizing: "border-box",
+            font: "13px sans-serif", background: "#F5F1E8", borderBottom: "1px solid #EFE9DC"
+          };
+          const action = {
+            display: "inline-flex", alignItems: "center", padding: "0.3rem 0.75rem",
+            font: "600 12px sans-serif", lineHeight: 1, borderRadius: "5px", cursor: "pointer",
+            textDecoration: "none", whiteSpace: "nowrap"
+          };
+          return h("div", { style: { position: "fixed", inset: 0, display: "flex", flexDirection: "column" } },
+            h("div", { style: bar },
+              h("button", {
+                type: "button", onClick: this.reload,
+                style: { ...action, color: "#003366", background: "#fff", border: "1px solid #FFA94D" }
+              }, "Reload"),
+              h("a", {
+                href: src, target: "_blank", rel: "noopener noreferrer",
+                style: { ...action, color: "#fff", background: "#FFA94D", border: "1px solid #e69540" }
+              }, "Open in new tab"),
+              h("code", {
+                title: url,
+                style: { flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
+              }, url),
+              h("span", { style: { color: "#6c757d", whiteSpace: "nowrap" } }, "Last saved version")
+            ),
+            h("iframe", {
+              key: this.state.nonce,
+              ref: (el) => { this.frame = el; },
+              onLoad: this.applyLive,
+              src: `${src}?_preview=${this.state.nonce}`,
+              title: "Hugo preview",
+              style: { flex: 1, width: "100%", border: 0 }
+            })
+          );
+        }
       });
+
+      [
+        "pages_en", "pages_de", "pages_it",
+        "services_en", "services_it",
+        "news_en", "news_it",
+        "site",
+        "landing_en",
+        "pricing_en",
+        "i18n_en", "i18n_it", "i18n_de"
+      ].forEach((name) => CMS.registerPreviewTemplate(name, HugoPreview));
+
+      // Give Hugo time to rebuild after the file is written, then refresh the iframe.
+      const reloadAfterBuild = () => setTimeout(() => reloadListeners.forEach((fn) => fn()), 1500);
+      // Stamp the GitHub login of the user who first saves a page; existing authors are kept.
+      const PAGE_COLLECTIONS = ["pages_en", "pages_de", "pages_it"];
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ author, entry }) => {
+          const data = entry.get("data");
+          if (!PAGE_COLLECTIONS.includes(entry.get("collection")) || data.get("author")) return data;
+          const login = author && (author.login || author.name);
+          return login ? data.set("author", login) : data;
+        }
+      });
+
+      CMS.registerEventListener({ name: "postSave", handler: reloadAfterBuild });
+      CMS.registerEventListener({ name: "postPublish", handler: reloadAfterBuild });
     </script>
   </body>
 </html>
