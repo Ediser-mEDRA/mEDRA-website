@@ -1,3 +1,4 @@
+baseURL: https://ediser-medra.github.io/mEDRA-website/
 title: multilingual European Registration Agency of DOI
 enableRobotsTXT: true
 minify: true

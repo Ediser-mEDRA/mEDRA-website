@@ -1,3 +1,4 @@
+baseURL: http://localhost:1313/mEDRA-website/
 title: multilingual European Registration Agency of DOI (Development)
 buildDrafts: true
 minify: false

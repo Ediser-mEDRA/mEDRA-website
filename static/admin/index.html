@@ -12,7 +12,8 @@
     <script src="../scripts/marked.min.js"></script>
     <script>
       // Hugo server origin; the admin is served by `hugo server`, so same origin by default.
-      const HUGO_ORIGIN = window.location.origin;
+      // Includes the baseURL sub-path (e.g. /mEDRA-website/) when /admin/ is served under it.
+      const HUGO_ORIGIN = window.location.origin + window.location.pathname.replace(/admin\/.*$/, "").replace(/\/$/, "");
       const LANGS = ["de", "en", "it"];
       const reloadListeners = new Set();
 
